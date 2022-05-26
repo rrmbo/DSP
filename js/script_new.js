@@ -100,15 +100,15 @@ function prepare(d) {
     d.id = d.id;
     d.date = parseDate(d.date);
     d.expense = d.expense;
-
-    // console.log(d.expense)
-
+    d.timestamp = Date.parse(d.date);
     return d;
 }
 
 function drawPlot(data) {
     var locations = plot.selectAll(".location")
         .data(data);
+
+    console.log(data)
 
     var plotMarginX = 200,
         plotMarginy = 200,
@@ -127,8 +127,6 @@ function drawPlot(data) {
 
     // if filtered dataset has more circles than already existing, transition new ones in
 
-    // console.log(data)
-
     locations.enter()
         .append("circle")
         .attr("class", "location")
@@ -141,18 +139,16 @@ function drawPlot(data) {
         // .style("opacity", 0.5)
         // .attr("r", Math.sqrt(Math.random()))
         .attr("r", function(d) {
-
-            console.log(d.expense)
-
+            // console.log(d.expense)
             return d.expense;
         })
         .transition()
         .duration(400)
+        .attr("r", 10)
+        .transition()
         .attr("r", function(d) {
             return d.expense;
-        })
-        .transition()
-        // .attr("r", data.expense);
+        });
 
     // if filtered dataset has less circles than already existing, remove excess
     locations.exit()
@@ -168,9 +164,10 @@ function update(h) {
 
     // filter data set and redraw plot
     var newData = dataset.filter(function(d) {
-        return d.date < h;
-
-
-    })
+            return d.date < h;
+        })
+        // var newData = dataset.filter(function(d) {
+        //     return d.timestamp < Date.parse(h)
+        // })
     drawPlot(newData);
 }
