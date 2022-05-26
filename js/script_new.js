@@ -1,13 +1,11 @@
 var dataset;
 
-var formatDateIntoYear = d3.timeFormat("%Y");
-var formatDate = d3.timeFormat("%b %Y");
-var parseDate = d3.timeParse("%m/%d/%y");
+var formatDateIntoDay = d3.timeFormat("%d");
+var formatDate = d3.timeFormat("%a %d");
+var parseDate = d3.timeParse("%d/%m/%y");
 
-// var startDate = new Date("2022-04-01"),
-//     endDate = new Date("2022-04-30");
-var startDate = new Date("2004-11-01"),
-    endDate = new Date("2017-04-01");
+var startDate = new Date("2022-04-01"),
+    endDate = new Date("2022-04-30");
 
 var margin = {
         top: 0,
@@ -68,7 +66,7 @@ slider.insert("g", ".track-overlay")
     .attr("y", 10)
     .attr("text-anchor", "middle")
     .text(function(d) {
-        return formatDateIntoYear(d);
+        return formatDateIntoDay(d);
     });
 
 var handle = slider.insert("circle", ".track-overlay")
@@ -93,7 +91,7 @@ var plot = svgPlot.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-d3.csv("/assets/data/circles.csv", prepare, function(data) {
+d3.csv("/assets/data/expenses_min.csv", prepare, function(data) {
     dataset = data;
     drawPlot(dataset);
 })
@@ -101,6 +99,10 @@ d3.csv("/assets/data/circles.csv", prepare, function(data) {
 function prepare(d) {
     d.id = d.id;
     d.date = parseDate(d.date);
+    d.expense = d.expense;
+
+    // console.log(d.expense)
+
     return d;
 }
 
@@ -124,6 +126,9 @@ function drawPlot(data) {
     var colors = [black, red, rose, violet, navy];
 
     // if filtered dataset has more circles than already existing, transition new ones in
+
+    // console.log(data)
+
     locations.enter()
         .append("circle")
         .attr("class", "location")
@@ -135,14 +140,19 @@ function drawPlot(data) {
         .style("fill", colors[Math.floor(Math.random() * colors.length)])
         // .style("opacity", 0.5)
         // .attr("r", Math.sqrt(Math.random()))
-        .attr("r", 1)
+        .attr("r", function(d) {
+
+            console.log(d.expense)
+
+            return d.expense;
+        })
         .transition()
         .duration(400)
-        .attr("r", Math.random() * 200)
+        .attr("r", function(d) {
+            return d.expense;
+        })
         .transition()
-        .attr("r", Math.random() * 100);
-
-    // console.log(colors[Math.floor(Math.random() * colors.length)])
+        // .attr("r", data.expense);
 
     // if filtered dataset has less circles than already existing, remove excess
     locations.exit()
@@ -159,6 +169,8 @@ function update(h) {
     // filter data set and redraw plot
     var newData = dataset.filter(function(d) {
         return d.date < h;
+
+
     })
     drawPlot(newData);
 }

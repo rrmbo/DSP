@@ -1,137 +1,164 @@
-// load JSON file
+var dataset;
 
-function readTextFile(file, callback) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
-    }
-    rawFile.send(null);
+var formatDateIntoYear = d3.timeFormat("%Y");
+var formatDate = d3.timeFormat("%b %Y");
+var parseDate = d3.timeParse("%m/%d/%y");
+
+// var startDate = new Date("2022-04-01"),
+//     endDate = new Date("2022-04-30");
+var startDate = new Date("2004-11-01"),
+    endDate = new Date("2017-04-01");
+
+var margin = {
+        top: 0,
+        right: 50,
+        bottom: 0,
+        left: 50
+    },
+    width = window.innerWidth - margin.left - margin.right,
+    height = 200 - margin.top - margin.bottom,
+    fullHeight = window.innerHeight - height,
+    halfWidth = window.innerWidth / 2,
+    halfHeight = window.innerHeight / 2;
+
+////////// slider //////////
+
+var svgSlider = d3.select("#slider")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", 200);
+
+var x = d3.scaleTime()
+    .domain([startDate, endDate])
+    .range([0, width])
+    .clamp(true);
+
+var slider = svgSlider.append("g")
+    .attr("class", "slider")
+    .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+
+slider.append("line")
+    .attr("class", "track")
+    .attr("x1", x.range()[0])
+    .attr("x2", x.range()[1])
+    .select(function() {
+        return this.parentNode.appendChild(this.cloneNode(true));
+    })
+    .attr("class", "track-inset")
+    .select(function() {
+        return this.parentNode.appendChild(this.cloneNode(true));
+    })
+    .attr("class", "track-overlay")
+    .call(d3.drag()
+        .on("start.interrupt", function() {
+            slider.interrupt();
+        })
+        .on("start drag", function() {
+            update(x.invert(d3.event.x));
+        }));
+
+slider.insert("g", ".track-overlay")
+    .attr("class", "ticks")
+    .attr("transform", "translate(0," + 18 + ")")
+    .selectAll("text")
+    .data(x.ticks(10))
+    .enter()
+    .append("text")
+    .attr("x", x)
+    .attr("y", 10)
+    .attr("text-anchor", "middle")
+    .text(function(d) {
+        return formatDateIntoYear(d);
+    });
+
+var handle = slider.insert("circle", ".track-overlay")
+    .attr("class", "handle")
+    .attr("r", 9);
+
+var label = slider.append("text")
+    .attr("class", "label")
+    .attr("text-anchor", "middle")
+    .text(formatDate(startDate))
+    .attr("transform", "translate(0," + (-25) + ")")
+
+////////// plot //////////
+
+var svgPlot = d3.select("#vis")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height);
+
+var plot = svgPlot.append("g")
+    .attr("class", "plot")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+d3.csv("/assets/data/circles.csv", prepare, function(data) {
+    dataset = data;
+    drawPlot(dataset);
+})
+
+function prepare(d) {
+    d.id = d.id;
+    d.date = parseDate(d.date);
+    return d;
 }
 
-//usage:
-readTextFile("../assets/data/expenses.json", function(text) {
-    var data = JSON.parse(text);
-    console.log(data);
-});
+function drawPlot(data) {
+    var locations = plot.selectAll(".location")
+        .data(data);
 
-var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
+    var plotMarginX = 200,
+        plotMarginy = 200,
+        maxPlotHeight = fullHeight - plotMarginy * 5 / 4,
+        maxPlotWidth = width - 2 * plotMarginX;
 
-// Step
-var sliderStep = d3
-    .sliderBottom()
-    .min(d3.min(data))
-    .max(d3.max(data))
-    .width(300)
-    .tickFormat(d3.format('.2%'))
-    .ticks(5)
-    .step(0.005)
-    .default(0.015)
-    .on('onchange', val => {
-        d3.select('p#value-step').text(d3.format('.2%')(val));
-    });
+    // Colors
 
-var gStep = d3
-    .select('div#slider-step')
-    .append('svg')
-    .attr('width', 500)
-    .attr('height', 100)
-    .append('g')
-    .attr('transform', 'translate(30,30)');
+    let black = "#000000",
+        red = "#ff3333",
+        rose = "#ffcccc",
+        violet = "#663399",
+        navy = "#000066";
 
-gStep.call(sliderStep);
+    var colors = [black, red, rose, violet, navy];
 
-d3.select('p#value-step').text(d3.format('.2%')(sliderStep.value()));
+    // if filtered dataset has more circles than already existing, transition new ones in
+    locations.enter()
+        .append("circle")
+        .attr("class", "location")
+        .attr("cx", (Math.random() * maxPlotWidth) + plotMarginX)
+        // .attr("cx", function(d) {
+        //     return x(d.date);
+        // })
+        .attr("cy", (Math.random() * maxPlotHeight) + plotMarginy)
+        .style("fill", colors[Math.floor(Math.random() * colors.length)])
+        // .style("opacity", 0.5)
+        // .attr("r", Math.sqrt(Math.random()))
+        .attr("r", 1)
+        .transition()
+        .duration(400)
+        .attr("r", Math.random() * 200)
+        .transition()
+        .attr("r", Math.random() * 100);
 
-// Time
-var dataTime = d3.range(0, 10).map(function(d) {
-    return new Date(1995 + d, 10, 3);
-});
+    // console.log(colors[Math.floor(Math.random() * colors.length)])
 
-let sliderTimeValue = 0
+    // if filtered dataset has less circles than already existing, remove excess
+    locations.exit()
+        .remove();
+}
 
-var sliderTime = d3
-    .sliderBottom()
-    .min(d3.min(dataTime))
-    .max(d3.max(dataTime))
-    .step(1000 * 60 * 60 * 24 * 365)
-    .width(300)
-    .tickFormat(d3.timeFormat('%Y'))
-    .tickValues(dataTime)
-    .default(new Date(1998, 10, 3))
-    .on('onchange', val => {
-        sliderTimeValue = val
-        console.log(sliderTimeValue)
-        d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
-    });
+function update(h) {
+    // update position and text of label according to slider scale
+    handle.attr("cx", x(h));
+    label
+        .attr("x", x(h))
+        .text(formatDate(h));
 
-var gTime = d3
-    .select('div#slider-time')
-    .append('svg')
-    .attr('width', 500)
-    .attr('height', 100)
-    .append('g')
-    .attr('transform', 'translate(30,30)');
-
-gTime.call(sliderTime);
-
-d3.select('p#value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
-
-// Range
-var sliderRange = d3
-    .sliderBottom()
-    .min(d3.min(data))
-    .max(d3.max(data))
-    .width(300)
-    .tickFormat(d3.format('.2%'))
-    .ticks(5)
-    .default([0.015, 0.02])
-    .fill('#2196f3')
-    .on('onchange', val => {
-        d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));
-    });
-
-var gRange = d3
-    .select('div#slider-range')
-    .append('svg')
-    .attr('width', 500)
-    .attr('height', 100)
-    .append('g')
-    .attr('transform', 'translate(30,30)');
-
-gRange.call(sliderRange);
-
-d3.select('p#value-range').text(
-    sliderRange
-    .value()
-    .map(d3.format('.2%'))
-    .join('-')
-);
-
-// Vertical
-var sliderVertical = d3
-    .sliderLeft()
-    .min(d3.min(data))
-    .max(d3.max(data))
-    .height(300)
-    .tickFormat(d3.format('.2%'))
-    .ticks(5)
-    .default(0.015)
-    .on('onchange', val => {
-        d3.select('p#value-vertical').text(d3.format('.2%')(val));
-    });
-
-var gVertical = d3
-    .select('div#slider-vertical')
-    .append('svg')
-    .attr('width', 100)
-    .attr('height', 400)
-    .append('g')
-    .attr('transform', 'translate(60,30)');
-
-gVertical.call(sliderVertical);
-
-d3.select('p#value-vertical').text(d3.format('.2%')(sliderVertical.value()));
+    // filter data set and redraw plot
+    var newData = dataset.filter(function(d) {
+        return d.date < h;
+    })
+    drawPlot(newData);
+}
