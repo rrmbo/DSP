@@ -1,0 +1,8 @@
+# Binaries for programs and plugins
+*.json
+# Dependency directories
+assets/data/circles.csv
+assets/data/expenses_max.csv
+assets/data/expenses_min.csv
+assets/data/export_transactions.csv
+
