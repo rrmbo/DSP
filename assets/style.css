@@ -6,8 +6,8 @@
     --violet: #663399;
     --navy: #000066;
     --window-width: 100vw;
-    --infobox-width: 30vw;
-    --full-width: 130vw;
+    --infobox-width: 20vw;
+    --full-width: calc(var(--window-width)+var(--infobox-width));
 }
 
 body {
