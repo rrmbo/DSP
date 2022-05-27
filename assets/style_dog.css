@@ -1,0 +1,162 @@
+:root {
+    --white: #fff;
+    --black: #000;
+    --red: #ff3333;
+    --rose: #ffcccc;
+    --violet: #663399;
+    --navy: #000066;
+    --window-width: 100vw;
+    --infobox-width: 20vw;
+    --full-width: calc(var(--window-width)+var(--infobox-width));
+}
+
+body {
+    font-family: "helvetia", Arial, sans-serif;
+    font-size: 12px;
+    color: var(--black);
+    width: var(--full-width);
+    overflow-y: hidden;
+}
+
+body,
+#vis,
+#vis svg {
+    height: 100vh;
+}
+
+.divider {
+    border-bottom: 2px solid var(--black);
+}
+
+input[type="checkbox" i] {
+    margin: 0.5em 0.5em 0 0;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+}
+
+#title {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    font-size: 4em;
+    font-weight: 900;
+}
+
+#index {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    text-align: right;
+    font-weight: 500;
+}
+
+#index span {
+    display: block;
+}
+
+.index-color::after {
+    content: "";
+    display: inline-block;
+    margin-left: 0.5em;
+    transform: translateY(0.1em);
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+}
+
+#index-1::after {
+    background-color: var(--black);
+}
+
+#index-2::after {
+    background-color: var(--rose);
+}
+
+#index-3::after {
+    background-color: var(--red);
+}
+
+#index-4::after {
+    background-color: var(--violet);
+}
+
+#index-5::after {
+    background-color: var(--navy);
+}
+
+#info-text {
+    width: var(--infobox-width);
+    height: 100vh;
+    padding: 50px;
+    position: absolute;
+    left: var(--window-width);
+    top: 0;
+}
+
+#info-text p {
+    margin-top: 0;
+    font-size: 2em;
+    font-weight: 100;
+    line-height: 1.2em;
+}
+
+#credits {
+    text-align: right;
+    width: var(--infobox-width);
+    padding: 50px;
+    position: absolute;
+    left: var(--window-width);
+    bottom: 0;
+}
+
+#slider {
+    position: absolute;
+    bottom: 0;
+}
+
+.ticks {
+    font-size: 10px;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+    stroke-linecap: round;
+}
+
+.track {
+    stroke-width: 2px;
+}
+
+
+/* .track-inset::before {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 30pxpx;
+    background-color: #000;
+} */
+
+.track-inset {
+    stroke: var(--black);
+    stroke-width: 2px;
+}
+
+.track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+    stroke: transparent;
+    cursor: crosshair;
+}
+
+.handle {
+    fill: var(--black);
+}
+
+.location {
+    background-image: url(/assets/img/hotdog_pink.png);
+    background-size: contain;
+}
