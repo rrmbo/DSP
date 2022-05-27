@@ -164,6 +164,10 @@ function drawPlot(data) {
         .transition()
         .duration(400);
 
+    svg.append("path")
+        .attr("class", "")
+        .attr("d", "")
+
     // if filtered dataset has less circles than already existing, remove excess
     locations.exit()
         .remove();

@@ -8,6 +8,7 @@
     --window-width: 100vw;
     --infobox-width: 20vw;
     --full-width: calc(var(--window-width)+var(--infobox-width));
+    --slider-height: 200px;
 }
 
 body {
@@ -36,11 +37,23 @@ input[type="checkbox" i] {
 }
 
 #title {
-    position: absolute;
+    position: fixed;
     left: 50px;
     top: 50px;
     font-size: 4em;
     font-weight: 900;
+}
+
+a,
+a:visited {
+    color: var(--black);
+    text-decoration: none;
+}
+
+#back-link {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    font-weight: 500;
 }
 
 #index {
@@ -89,7 +102,6 @@ input[type="checkbox" i] {
 
 #info-text {
     width: var(--infobox-width);
-    height: 100vh;
     padding: 50px;
     position: absolute;
     left: var(--window-width);
@@ -136,7 +148,7 @@ input[type="checkbox" i] {
     display: block;
     content: "";
     width: 100%;
-    height: 30pxpx;
+    height: 30px;
     background-color: #000;
 } */
 

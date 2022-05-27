@@ -41,7 +41,6 @@ var x = d3.scaleTime()
     .clamp(true);
 
 var y = (hour) => (halfHeight * hour / 24) + halfHeight / 2
-    // var y = (hour) => halfHeight + hour * height / 24
 
 var slider = svgSlider.append("g")
     .attr("class", "slider")
@@ -65,7 +64,7 @@ slider.append("line")
         })
         .on("start drag", function() {
             update(x.invert(d3.event.x));
-        }))
+        }));
 
 slider.insert("g", ".track-overlay")
     .attr("class", "ticks")
@@ -113,15 +112,16 @@ function prepare(d) {
     d.date = parseDate(d.date);
     d.expense = d.expense;
     d.type = d.type
-        // d.timestamp = Date.parse(d.date);
+    d.timestamp = Date.parse(d.date);
+    d.xpos = parseInt(x(d.date));
+    //console.log(d.x)
+
     return d;
 }
 
 function drawPlot(data) {
     var locations = plot.selectAll(".location")
         .data(data);
-
-    // console.log(data)
 
     var plotMarginX = 200,
         plotMarginy = 200,
@@ -144,23 +144,26 @@ function drawPlot(data) {
         "travel": navy,
     }
 
-    //var colors = [black, red, rose, violet, navy];
+    // var colors = [black, red, rose, violet, navy];
 
     // if filtered dataset has more circles than already existing, transition new ones in
+
+    // console.log(data)
 
     locations.enter()
         .append("circle")
         .attr("class", "location")
-        // .attr("cx", (Math.random() * maxPlotWidth) + plotMarginX)
+        //.attr("cx", (Math.random() * maxPlotWidth) + plotMarginX)
         .attr("cx", function(d) {
-            return x(d.date);
+            return (parseInt(d.xpos));
         })
-        // .attr("cy", (Math.random() * maxPlotHeight) + plotMarginy)
         .attr("cy", (d) => y(d.date.getHours()))
-        //.style("fill", colors[Math.floor(Math.random() * colors.length)])
+        .attr("id", function(d) {
+
+            return (d.id);
+        })
         .style("fill", (d) => colors[d.type])
-        .style("z-index", zIndexExpense)
-        // .style("opacity", 0.5)
+        .style("opacity", 0)
         .attr("r", getExpenseValue)
         .transition()
         .duration(400)
@@ -177,24 +180,27 @@ d3.select("#opa").on("change", update);
 update();
 
 function update(h) {
-    // change transparency for the data circles
+    // update position and text of label according to slider scale
     if (d3.select("#opa").property("checked")) {
         d3.selectAll(".location").style("opacity", 0.5);
     } else {
         d3.selectAll(".location").style("opacity", 1);
     }
-    // update position and text of label according to slider scale
+
     handle.attr("cx", x(h));
     label
         .attr("x", x(h))
         .text(formatDate(h));
 
-    // filter data set and redraw plot
-    var newData = dataset.filter(function(d) {
-            return d.date < h;
-        })
-        // var newData = dataset.filter(function(d) {
-        //     return d.timestamp < Date.parse(h)
-        // })
-    drawPlot(newData);
+
+
+    plot.selectAll(".location")
+        .filter(function(d) { return d.timestamp > Date.parse(h) }) //select all the countries and prepare for a transition to new values
+        .style("opacity", 0)
+
+    plot.selectAll(".location").transition()
+        .filter(function(d) { return d.timestamp <= Date.parse(h) }) //select all the countries and prepare for a transition to new values
+        .duration(750) // give it a smooth time period for the transition
+        .style("opacity", 1)
+
 }
