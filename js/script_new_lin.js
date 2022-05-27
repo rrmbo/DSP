@@ -10,10 +10,10 @@ var parseDate = d3.timeParse("%d/%m/%y/%H:%M");
 var startDate = new Date("2022-03-31"),
     endDate = new Date("2022-05-03");
 var getExpenseValue = function(d) {
-    return Math.sqrt(d.expense) * 3
+    return d.expense / 10
 }
 var getExpenseValueZoom = function(d) {
-    return Math.sqrt(d.expense) * 4
+    return d.expense / 9
 }
 var zIndexExpense = function(d) {
     return 999 - (Math.round(d.expense / 3))
@@ -43,7 +43,7 @@ var x = d3.scaleTime()
     .range([0, width])
     .clamp(true);
 
-var y = (hour) => (halfHeight * hour / 24) + halfHeight / 2
+var y = (hour) => (halfHeight * hour / 24) + halfHeight / 3
     // var y = (hour) => halfHeight + hour * height / 24
 
 var slider = svgSlider.append("g")
