@@ -1,30 +1,30 @@
-﻿id,date,type,text,expense
-29,30/04/22/18:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,15.5
-28,30/04/22/08:00,bills,PREIS FÜR BANKPAKET Smart,5
-27,29/04/22/20:00,food,KAUF/DIENSTLEISTUNG Bäckerei-Konditorei Hotz Dübendorf Schweiz,71.9
-26,29/04/22/18:00,travel,LADUNG KREDITKARTENKONTO,20
-25,28/04/22/18:00,items,TWINT GELD SENDEN,1950
-24,23/04/22/18:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,16.8
-23,20/04/22/18:00,clothes,KAUF/DIENSTLEISTUNG Migros Bahnhof Basel Schweiz,7.6
-22,20/04/22/12:00,food,KAUF/DIENSTLEISTUNG ALDI Suisse (Filiale 04) Dübendorf Schweiz,38.1
-21,20/04/22/10:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,26.9
-20,19/04/22/22:00,food,TWINT KAUF/DIENSTLEISTUNG Migros M EX Sihlpassage Zürich,8.8
-19,19/04/22/21:00,clothes,LADUNG KREDITKARTENKONTO,89
-18,19/04/22/20:00,travel,ESR Schweizerische Bundesbahnen SBB Personenverkehr Bern REFERENZ: SBB GA (monatlich),340
-17,19/04/22/18:00,bills,ESR Hochschule Luzern Luzern REFERENZ: Rechnung 13669019,1038
-16,19/04/22/24:00,bills,ESR Sunrise UPC GmbH Glattpark(Opfikon) REFERENZ: UPC Mobile,39
-15,19/04/22/12:00,travel,ESR UBS Switzerland AG 8098 Zürich REFERENZ: SBB Mobile Tickets,67.5
-14,18/04/22/18:00,food,KAUF/DIENSTLEISTUNG MIG migrolino Dübendorf SBB Dübendorf Schweiz,19.25
-13,15/04/22/19:00,food,TWINT KAUF/DIENSTLEISTUNG Migros M Daily Bahnhof Luzern Luzern,8.4
-12,15/04/22/18:00,food,TWINT KAUF/DIENSTLEISTUNG Migros M EX Sihlpassage Zürich,48.05
-11,15/04/22/13:00,travel,LADUNG KREDITKARTENKONTO,10
-10,15/04/22/12:00,items,LADUNG KREDITKARTENKONTO,3
-9,12/04/22/18:00,food,KAUF/DIENSTLEISTUNG Migros Dübendorf Dübendorf Schweiz,0.2
-8,12/04/22/19:00,food,KAUF/DIENSTLEISTUNG Migros Dübendorf Dübendorf Schweiz,44.9
-7,09/04/22/18:00,food,KAUF/DIENSTLEISTUNG ALDI Suisse AG Emmenbrücke Schweiz,10.45
-6,08/04/22/17:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,3.95
-5,08/04/22/10:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,8.75
-4,07/04/22/10:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,14.9
-3,06/04/22/16:00,food,KAUF/DIENSTLEISTUNG Denner Satellit Kriens Schweiz,0.3
-2,05/04/22/12:00,travel,KAUF/DIENSTLEISTUNG KLOSTERS SELFRANGA RHB KLOSTERS Schweiz,39
-1,01/04/22/18:00,travel,LADUNG KREDITKARTENKONTO,15
+﻿id,date,type,text,expense,statement
+29,30/04/22/18:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,15.5,Uhh that looks like a normal pears-nuts-lunch and bread maybe?
+28,30/04/22/08:00,bills,PREIS FÜR BANKPAKET Smart,5,Every fucking month – they take money for being able to make money with my money.
+27,29/04/22/20:00,food,KAUF/DIENSTLEISTUNG Bäckerei-Konditorei Hotz Dübendorf Schweiz,71.9,I personally would NEVER go here EVER – unless it's someone's birthday!
+26,29/04/22/18:00,travel,LADUNG KREDITKARTENKONTO,20,Again...SBB lost half the carriages or something.
+25,28/04/22/18:00,items,TWINT GELD SENDEN,1950,My grandmother's 2011 low speced MacBook started me off well into this studies. But after it not being able to update to anything higher than OS HighSierra and therefore not being able to run Adobe CC software. So I borrowed my friend's 2014 low spec MacBook Pro next to be able to do the needed work – intending to not buy a new machine for as long as possible. Then came the CAD module and fucked over my whole financial plans – had to get a loan to buy an used 2019 MacBook Pro off Tutti that is technically such a bad model since the battery and the cooling system can NOT handle that kind of hardware in that small amount of space: Go to hell Intel! And you too Apple for letting that slide!
+24,23/04/22/18:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,16.8,Another lunch and snack purchase I guess...
+23,20/04/22/18:00,food,KAUF/DIENSTLEISTUNG Migros Bahnhof Basel Schweiz,7.6, Mhhh – processed vegan spinach giches.
+22,20/04/22/12:00,food,KAUF/DIENSTLEISTUNG ALDI Suisse (Filiale 04) Dübendorf Schweiz,38.1, That's got to get me through the week.
+21,20/04/22/10:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,26.9, That is way too much for just a lunch! Must have been combined with weekly groceries.
+20,19/04/22/22:00,food,TWINT KAUF/DIENSTLEISTUNG Migros M EX Sihlpassage Zürich,8.8, Migros is just too costly on a daily base compared to Lidl and Aldi. But sometimes they offer these reduced fresh Ravioli.
+19,19/04/22/21:00,travel,LADUNG KREDITKARTENKONTO,89, Rental bikes are the devil but they are also very convenient.
+18,19/04/22/20:00,travel,ESR Schweizerische Bundesbahnen SBB Personenverkehr Bern REFERENZ: SBB GA (monatlich),340, I have to – what can one do. A montly ticket for the line Zurich-Emmen costs just a tiny bit less and I can defenetly not afford the annual price of either.
+17,19/04/22/18:00,bills,ESR Hochschule Luzern REFERENZ: Rechnung 13669019,1038, A huge semi-annual price for not so much in return so far – we'll see about that...
+16,19/04/22/24:00,bills,ESR Sunrise UPC GmbH Glattpark(Opfikon) REFERENZ: UPC Mobile,39, Well technically calling back home from anywhere in the EU would be included – if you can afford to travel there I guess.
+15,19/04/22/12:00,travel,ESR UBS Switzerland AG 8098 Zürich REFERENZ: SBB Mobile Tickets,67.5, As if the monthly GA is not enough.
+14,18/04/22/18:00,food,KAUF/DIENSTLEISTUNG MIG migrolino Dübendorf SBB Dübendorf Schweiz,19.25, Haaa someone forgot to plan his meals and must now pay premium prices.
+13,15/04/22/19:00,food,TWINT KAUF/DIENSTLEISTUNG Migros M Daily Bahnhof Luzern Luzern,8.4, This is a very unusual one. Maybe an offered coffee or some other desperate action to socialize?
+12,15/04/22/18:00,food,TWINT KAUF/DIENSTLEISTUNG Migros M EX Sihlpassage Zürich,48.05, Since it's Migros I think that was for a single organic banana and small bottel of water!
+11,15/04/22/13:00,travel,LADUNG KREDITKARTENKONTO,10, We had that before. Covid. Responsebilites to not kill my grandparents. Packed public transportation. Class upgrade.
+10,15/04/22/12:00,items,LADUNG KREDITKARTENKONTO,3, Aliexpress accessories – definetly
+9,12/04/22/19:01,food,KAUF/DIENSTLEISTUNG Migros Dübendorf Dübendorf Schweiz,0.2, Get fucked Migros. 20 cent for a paper bag. Not sure you are making any money on this after deduction of transaction fee.
+8,12/04/22/19:00,food,KAUF/DIENSTLEISTUNG Migros Dübendorf Dübendorf Schweiz,44.9, Unfortunately a very expensive grocery trip.
+7,09/04/22/18:00,food,KAUF/DIENSTLEISTUNG ALDI Suisse AG Emmenbrücke Schweiz,10.45, Lunch. Most probably something poor like nuts.
+6,08/04/22/17:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,3.95,Lunch: Nuts and pears.
+5,08/04/22/10:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,8.75,Lunch: Nuts and pears.
+4,07/04/22/10:00,food,KAUF/DIENSTLEISTUNG Lidl 230 Emmenbrücke Schweiz,14.9,Lunch: Nuts and pears and something more.
+3,06/04/22/16:00,food,KAUF/DIENSTLEISTUNG Denner Satellit Kriens Schweiz,0.3,Water. Stay hydrated!
+2,05/04/22/12:00,travel,KAUF/DIENSTLEISTUNG KLOSTERS SELFRANGA RHB KLOSTERS Schweiz,39, Ok this story is to sad to tell. Trust me – I mean it.
+1,01/04/22/18:00,travel,LADUNG KREDITKARTENKONTO,15,Looks like someone was claustrophobic enough to do a class upgrade on the train – to then having to save up that extra expense on food the week ahead.

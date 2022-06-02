@@ -155,8 +155,3 @@ input[type="checkbox" i] {
 .handle {
     fill: var(--black);
 }
-
-.location {
-    background-image: url(/assets/img/hotdog_pink.png);
-    background-size: contain;
-}

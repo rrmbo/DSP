@@ -21,7 +21,7 @@ body {
 
 body,
 #vis,
-#vis svg {
+#vis #canvas {
     height: 100vh;
 }
 
@@ -163,11 +163,31 @@ h1 {
 
 .track-overlay {
     pointer-events: stroke;
-    stroke-width: 50px;
+    stroke-width: 100px;
     stroke: transparent;
     cursor: crosshair;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .handle {
     fill: var(--black);
+}
+
+.popup {
+    opacity: 0;
+    position: fixed;
+    left: 50px;
+    top: 150px;
+    max-width: 30vw;
+    padding: 0 10px 10px 0;
+    font-size: 1.5em;
+    margin-block-end: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+}
+
+.popup h1 {
+    font-size: 1em;
 }
