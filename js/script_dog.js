@@ -19,10 +19,12 @@ var zIndexExpense = function(d) {
     return 999 - (Math.round(d.expense / 3))
 }
 
+console.log(getExpenseValue)
+
 var margin = {
-        top: 200,
+        top: 0,
         right: 50,
-        bottom: 200,
+        bottom: 0,
         left: 50
     },
     width = window.innerWidth - margin.left - margin.right,
@@ -147,7 +149,7 @@ function drawPlot(data) {
     // if filtered dataset has more circles than already existing, transition new ones in
 
     locations.enter()
-        .append("svg")
+        .append("g")
         .attr("class", "location")
         // .attr("transform", function(d) {
         //     return x(d.date);

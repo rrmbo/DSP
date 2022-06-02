@@ -10,7 +10,7 @@ var getExpenseValue = function(d) {
     return Math.sqrt(d.expense) * 3
 }
 var getExpenseValueZoom = function(d) {
-    return Math.sqrt(d.expense) * 4
+    return Math.sqrt(d.expense) * 3 + 20
 }
 var zIndexExpense = function(d) {
     return 999 - (Math.round(d.expense / 3))
@@ -161,13 +161,11 @@ function drawPlot(data) {
             return (d.id);
         })
         .style("fill", (d) => colors[d.type])
+        .style("stroke", (d) => colors[d.type])
+        .style("stroke-width", 2)
+        .style("fill-opacity", 1)
         .style("opacity", 0)
         .attr("r", getExpenseValue)
-        // .transition()
-        // .duration(400)
-        // .attr("r", getExpenseValueZoom)
-        // .transition()
-        // .attr("r", getExpenseValue);
 
     // if filtered dataset has less circles than already existing, remove excess
     locations.exit()
@@ -181,9 +179,10 @@ function update(h) {
     // update position and text of label according to slider scale
     if (d3.select("#trans").property("checked")) {
         d3.selectAll(".location")
-            .style("stroke", (d) => colors[d.type]);
+            .style("fill-opacity", 0);
     } else {
-        d3.selectAll(".location").style("opacity", 1);
+        d3.selectAll(".location")
+            .style("fill-opacity", 1);
     }
 
     handle.attr("cx", x(h));
@@ -197,9 +196,23 @@ function update(h) {
         .filter(function(d) { return d.timestamp > Date.parse(h) }) //select all the countries and prepare for a transition to new values
         .style("opacity", 0)
 
-    plot.selectAll(".location").transition()
+    plot.selectAll(".location")
+        .transition()
         .filter(function(d) { return d.timestamp <= Date.parse(h) }) //select all the countries and prepare for a transition to new values
-        .duration(750) // give it a smooth time period for the transition
+        .duration(400)
         .style("opacity", 1)
-
+        .attr("r", getExpenseValueZoom)
+        .transition()
+        .attr("r", getExpenseValue);
 }
+
+var circles = d3.selectAll('circle')
+var zOrders = {
+    radii: circles[0].map(function(cv) { return cv.r.baseVal.value; }),
+}
+
+console.log(circles)
+
+circles.data(zOrders[setOrderBy]);
+
+circles.sort(setOrder);
