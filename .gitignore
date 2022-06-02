@@ -1,13 +1,10 @@
 # Binaries for programs and plugins
-*.json
 # Dependency directories
 assets/data/circles.csv
 assets/data/expenses_max.csv
 assets/data/expenses_min.csv
+assets/data/expenses.json
 assets/data/export_transactions.csv
 
 # Remove after push
-git rm --cached circles.csv
-git rm --cached expenses_max.csv
-git rm --cached expenses_min.csv
-git rm --cached export_transactions.csv
+# git rm --cached assets/data/circles.csv
