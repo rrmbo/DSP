@@ -7,7 +7,7 @@ assets/data/expenses_min.csv
 assets/data/export_transactions.csv
 
 # Remove after push
-git rm --cached assets/data/circles.csv
-git rm --cached assets/data/expenses_max.csv
-git rm --cached assets/data/expenses_min.csv
-git rm --cached assets/data/export_transactions.csv
+git rm --cached circles.csv
+git rm --cached expenses_max.csv
+git rm --cached expenses_min.csv
+git rm --cached export_transactions.csv
