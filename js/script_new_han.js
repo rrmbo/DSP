@@ -123,10 +123,10 @@ function drawPlot(data) {
     var locations = plot.selectAll(".location")
         .data(data);
 
-    var plotMarginX = 200,
-        plotMarginy = 200,
-        maxPlotHeight = fullHeight - plotMarginy * 5 / 4,
-        maxPlotWidth = width - 2 * plotMarginX;
+    // var plotMarginX = 200,
+    //     plotMarginy = 200,
+    //     maxPlotHeight = fullHeight - plotMarginy * 5 / 4,
+    //     maxPlotWidth = width - 2 * plotMarginX;
 
     // Colors
 
@@ -153,36 +153,35 @@ function drawPlot(data) {
     locations.enter()
         .append("circle")
         .attr("class", "location")
-        //.attr("cx", (Math.random() * maxPlotWidth) + plotMarginX)
         .attr("cx", function(d) {
             return (parseInt(d.xpos));
         })
         .attr("cy", (d) => y(d.date.getHours()))
         .attr("id", function(d) {
-
             return (d.id);
         })
         .style("fill", (d) => colors[d.type])
         .style("opacity", 0)
         .attr("r", getExpenseValue)
-        .transition()
-        .duration(400)
-        .attr("r", getExpenseValueZoom)
-        .transition()
-        .attr("r", getExpenseValue);
+        // .transition()
+        // .duration(400)
+        // .attr("r", getExpenseValueZoom)
+        // .transition()
+        // .attr("r", getExpenseValue);
 
     // if filtered dataset has less circles than already existing, remove excess
     locations.exit()
         .remove();
 }
 
-d3.select("#opa").on("change", update);
+d3.select("#trans").on("change", update);
 update();
 
 function update(h) {
     // update position and text of label according to slider scale
-    if (d3.select("#opa").property("checked")) {
-        d3.selectAll(".location").style("opacity", 0.5);
+    if (d3.select("#trans").property("checked")) {
+        d3.selectAll(".location")
+            .style("stroke", (d) => colors[d.type]);
     } else {
         d3.selectAll(".location").style("opacity", 1);
     }

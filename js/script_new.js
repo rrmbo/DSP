@@ -159,6 +159,7 @@ function drawPlot(data) {
         .attr("cy", (d) => y(d.date.getHours()))
         //.style("fill", colors[Math.floor(Math.random() * colors.length)])
         .style("fill", (d) => colors[d.type])
+        .style("position", "absolute")
         .style("z-index", zIndexExpense)
         // .style("opacity", 0.5)
         .attr("r", getExpenseValue)
@@ -173,12 +174,12 @@ function drawPlot(data) {
         .remove();
 }
 
-d3.select("#opa").on("change", update);
+d3.select("#trans").on("change", update);
 update();
 
 function update(h) {
     // change transparency for the data circles
-    if (d3.select("#opa").property("checked")) {
+    if (d3.select("#trans").property("checked")) {
         d3.selectAll(".location").style("opacity", 0.5);
     } else {
         d3.selectAll(".location").style("opacity", 1);

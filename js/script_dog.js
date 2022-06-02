@@ -20,9 +20,9 @@ var zIndexExpense = function(d) {
 }
 
 var margin = {
-        top: 0,
+        top: 200,
         right: 50,
-        bottom: 0,
+        bottom: 200,
         left: 50
     },
     width = window.innerWidth - margin.left - margin.right,
@@ -123,13 +123,8 @@ function prepare(d) {
 function drawPlot(data) {
     var locations = plot.selectAll(".location")
         .data(data);
-
-    console.log(data)
-
-    var plotMarginX = 200,
-        plotMarginy = 200,
-        maxPlotHeight = fullHeight - plotMarginy * 5 / 4,
-        maxPlotWidth = width - 2 * plotMarginX;
+    var hotDog = plot.selectAll(".hot-dog")
+        .data(data);
 
     // Colors
 
@@ -157,16 +152,15 @@ function drawPlot(data) {
         // .attr("transform", function(d) {
         //     return x(d.date);
         // }, (d) => y(d.date.getHours()))
-        .style("transform", "rotate(" + Math.random() * 360 + ")")
-        .style("z-index", zIndexExpense)
+        .attr("transform", "translate (" + Math.random() * width + "," + Math.random() * fullHeight + 200 + ") rotate(" + Math.random() * 360 + ")")
+        // .style("z-index", zIndexExpense)
         .attr("width", getExpenseValue)
         .attr("height", getExpenseValue)
-        .transition()
-        .duration(400);
-
-    svg.append("path")
-        .attr("class", "")
-        .attr("d", "")
+        // .transition()
+        // .duration(400);
+        .append("g")
+        .attr("class", "hot-dog")
+        .html('<circle r="16" fill="red"></circle>');
 
     // if filtered dataset has less circles than already existing, remove excess
     locations.exit()
