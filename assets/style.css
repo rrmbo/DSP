@@ -110,9 +110,13 @@ a:visited {
 
 #info-text p {
     margin-top: 0;
-    font-size: 2em;
+    font-size: 1.6em;
     font-weight: 100;
     line-height: 1.2em;
+}
+
+h1 {
+    font-size: 1.6em;
 }
 
 #credits {
