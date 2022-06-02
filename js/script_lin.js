@@ -1,5 +1,6 @@
 var dataset;
 
+
 var formatDateIntoDay = d3.timeFormat("%d");
 var formatDate = d3.timeFormat("%a %d");
 var parseDate = d3.timeParse("%d/%m/%y/%H:%M");
@@ -7,10 +8,10 @@ var parseDate = d3.timeParse("%d/%m/%y/%H:%M");
 var startDate = new Date("2022-03-31"),
     endDate = new Date("2022-05-03");
 var getExpenseValue = function(d) {
-    return Math.sqrt(d.expense) * 3
+    return d.expense / 10
 }
 var getExpenseValueZoom = function(d) {
-    return Math.sqrt(d.expense) * 4
+    return d.expense / 9
 }
 var zIndexExpense = function(d) {
     return 999 - (Math.round(d.expense / 3))

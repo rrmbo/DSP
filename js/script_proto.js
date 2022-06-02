@@ -1,23 +1,13 @@
 var dataset;
 
+var formatDateIntoYear = d3.timeFormat("%Y");
+var formatDate = d3.timeFormat("%b %Y");
+var parseDate = d3.timeParse("%m/%d/%y");
 
-var formatDateIntoDay = d3.timeFormat("%d");
-var formatDate = d3.timeFormat("%a %d");
-var parseDate = d3.timeParse("%d/%m/%y/%H:%M");
-// var parseTime = d3.timeParse("%H:%M");
-
-
-var startDate = new Date("2022-03-31"),
-    endDate = new Date("2022-05-03");
-var getExpenseValue = function(d) {
-    return d.expense / 10
-}
-var getExpenseValueZoom = function(d) {
-    return d.expense / 9
-}
-var zIndexExpense = function(d) {
-    return 999 - (Math.round(d.expense / 3))
-}
+// var startDate = new Date("2022-04-01"),
+//     endDate = new Date("2022-04-30");
+var startDate = new Date("2004-11-01"),
+    endDate = new Date("2017-04-01");
 
 var margin = {
         top: 0,
@@ -43,9 +33,6 @@ var x = d3.scaleTime()
     .range([0, width])
     .clamp(true);
 
-var y = (hour) => (halfHeight * hour / 24) + halfHeight / 3
-    // var y = (hour) => halfHeight + hour * height / 24
-
 var slider = svgSlider.append("g")
     .attr("class", "slider")
     .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
@@ -68,20 +55,20 @@ slider.append("line")
         })
         .on("start drag", function() {
             update(x.invert(d3.event.x));
-        }))
+        }));
 
 slider.insert("g", ".track-overlay")
     .attr("class", "ticks")
     .attr("transform", "translate(0," + 18 + ")")
     .selectAll("text")
-    .data(x.ticks(34))
+    .data(x.ticks(10))
     .enter()
     .append("text")
     .attr("x", x)
     .attr("y", 10)
     .attr("text-anchor", "middle")
     .text(function(d) {
-        return formatDateIntoDay(d);
+        return formatDateIntoYear(d);
     });
 
 var handle = slider.insert("circle", ".track-overlay")
@@ -106,7 +93,7 @@ var plot = svgPlot.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-d3.csv("/assets/data/expenses_max.csv", prepare, function(data) {
+d3.csv("/assets/data/circles.csv", prepare, function(data) {
     dataset = data;
     drawPlot(dataset);
 })
@@ -114,17 +101,12 @@ d3.csv("/assets/data/expenses_max.csv", prepare, function(data) {
 function prepare(d) {
     d.id = d.id;
     d.date = parseDate(d.date);
-    d.expense = d.expense;
-    d.type = d.type
-        // d.timestamp = Date.parse(d.date);
     return d;
 }
 
 function drawPlot(data) {
     var locations = plot.selectAll(".location")
         .data(data);
-
-    console.log(data)
 
     var plotMarginX = 200,
         plotMarginy = 200,
@@ -139,54 +121,35 @@ function drawPlot(data) {
         violet = "#663399",
         navy = "#000066";
 
-    var colors = {
-        "bills": black,
-        "items": rose,
-        "food": red,
-        "clothes": violet,
-        "travel": navy,
-    }
-
-    //var colors = [black, red, rose, violet, navy];
+    var colors = [black, red, rose, violet, navy];
 
     // if filtered dataset has more circles than already existing, transition new ones in
-
     locations.enter()
         .append("circle")
         .attr("class", "location")
-        // .attr("cx", (Math.random() * maxPlotWidth) + plotMarginX)
-        .attr("cx", function(d) {
-            return x(d.date);
-        })
-        // .attr("cy", (Math.random() * maxPlotHeight) + plotMarginy)
-        .attr("cy", (d) => y(d.date.getHours()))
-        //.style("fill", colors[Math.floor(Math.random() * colors.length)])
-        .style("fill", (d) => colors[d.type])
-        .style("position", "absolute")
-        .style("z-index", zIndexExpense)
+        .attr("cx", (Math.random() * maxPlotWidth) + plotMarginX)
+        // .attr("cx", function(d) {
+        //     return x(d.date);
+        // })
+        .attr("cy", (Math.random() * maxPlotHeight) + plotMarginy)
+        .style("fill", colors[Math.floor(Math.random() * colors.length)])
         // .style("opacity", 0.5)
-        .attr("r", getExpenseValue)
+        // .attr("r", Math.sqrt(Math.random()))
+        .attr("r", 1)
         .transition()
         .duration(400)
-        .attr("r", getExpenseValueZoom)
+        .attr("r", Math.random() * 200)
         .transition()
-        .attr("r", getExpenseValue);
+        .attr("r", Math.random() * 100);
+
+    // console.log(colors[Math.floor(Math.random() * colors.length)])
 
     // if filtered dataset has less circles than already existing, remove excess
     locations.exit()
         .remove();
 }
 
-d3.select("#opa").on("change", update);
-update();
-
 function update(h) {
-    // change transparency for the data circles
-    if (d3.select("#opa").property("checked")) {
-        d3.selectAll(".location").style("opacity", 0.5);
-    } else {
-        d3.selectAll(".location").style("opacity", 1);
-    }
     // update position and text of label according to slider scale
     handle.attr("cx", x(h));
     label
@@ -195,10 +158,7 @@ function update(h) {
 
     // filter data set and redraw plot
     var newData = dataset.filter(function(d) {
-            return d.date < h;
-        })
-        // var newData = dataset.filter(function(d) {
-        //     return d.timestamp < Date.parse(h)
-        // })
+        return d.date < h;
+    })
     drawPlot(newData);
 }
