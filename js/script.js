@@ -40,7 +40,7 @@ var x = d3.scaleTime()
     .range([0, width])
     .clamp(true);
 
-var y = (hour) => (halfHeight * hour / 24) + halfHeight / 2
+var y = (hour) => (fullHeight - 250 - (fullHeight - 250) * hour / 24) + halfHeight / 1.5;
 
 var slider = svgSlider.append("g")
     .attr("class", "slider")
@@ -234,7 +234,21 @@ function drawPlot(data) {
         .remove();
 }
 
-d3.select("#trans").on("change", update);
+// linking
+
+d3.select("#info-link")
+    .attr("href", "#info-text")
+    .html('about &#8594;')
+
+if (d3.select("#info-link").attr) {
+
+}
+
+
+// update
+
+d3.select("#trans")
+    .on("change", update);
 update();
 
 function update(h) {
@@ -242,13 +256,13 @@ function update(h) {
     if (d3.select("#trans").property("checked")) {
         d3.selectAll(".location")
             .style("fill-opacity", 0);
-        d3.selectAll(".popup")
-            .style("background-color", "unset")
+        // d3.selectAll(".popup")
+        //     .style("background-color", "unset")
     } else {
         d3.selectAll(".location")
             .style("fill-opacity", 1);
-        d3.selectAll(".popup")
-            .style("background-color", "var--(white)")
+        // d3.selectAll(".popup")
+        //     .style("background-color", "var--(white)")
     }
 
     handle.attr("cx", x(h));
