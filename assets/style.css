@@ -191,3 +191,10 @@ h1 {
 .popup h1 {
     font-size: 1em;
 }
+
+.kaching {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translate(0, 0);
+}

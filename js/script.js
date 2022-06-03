@@ -46,7 +46,8 @@ var slider = svgSlider.append("g")
     .attr("class", "slider")
     .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
 
-slider.append("line")
+slider
+    .append("line")
     .attr("class", "track")
     .attr("x1", x.range()[0])
     .attr("x2", x.range()[1])
@@ -66,7 +67,8 @@ slider.append("line")
             update(x.invert(d3.event.x));
         }));
 
-slider.insert("g", ".track-overlay")
+slider
+    .insert("g", ".track-overlay")
     .attr("class", "ticks")
     .attr("transform", "translate(0," + 18 + ")")
     .selectAll("text")
@@ -187,11 +189,11 @@ function drawPlot(data) {
 
     var mouseover = function() {
         PopUp
-            .style("opacity", 1)
+            .style("opacity", 1);
         kaChing
-            .style("fill-opacity", 1)
-            .attr("transform", "translate (" + (d3.mouse(this)[0] + 70) + "," + (d3.mouse(this)[1]) + ")")
+            .style("fill-opacity", 1);
     }
+
     var mousemove = function(d) {
         if (d3.select("#real").property("checked")) {
             PopUp
@@ -200,18 +202,22 @@ function drawPlot(data) {
             PopUp
                 .html(d.text + "<br><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
         }
-
+        kaChing
+            .attr("transform", "translate (" + (d3.mouse(this)[0] + 70) + "," + (d3.mouse(this)[1]) + ")")
+            // .attr("transform", "translate(0,0)")
     }
+
     var mouseleave = function() {
         PopUp
             .style("opacity", 0)
         kaChing
-            .style("opacity", 0)
+            .style("fill-opacity", 0)
     }
 
     // if filtered dataset has more circles than already existing, transition new ones in
 
-    locations.enter()
+    locations
+        .enter()
         .append("circle")
         .attr("class", "location")
         .attr("cx", function(d) {
@@ -230,7 +236,8 @@ function drawPlot(data) {
         .on("mouseleave", mouseleave);
 
     // if filtered dataset has less circles than already existing, remove excess
-    locations.exit()
+    locations
+        .exit()
         .remove();
 }
 
@@ -240,9 +247,8 @@ d3.select("#info-link")
     .attr("href", "#info-text")
     .html('about &#8594;')
 
-if (d3.select("#info-link").attr) {
-
-}
+// if (d3.select("#info-link")) {
+// }
 
 
 // update
@@ -265,7 +271,8 @@ function update(h) {
         //     .style("background-color", "var--(white)")
     }
 
-    handle.attr("cx", x(h));
+    handle
+        .attr("cx", x(h));
     label
         .attr("x", x(h))
         .text(formatDate(h));
@@ -290,10 +297,12 @@ function update(h) {
 
 var circles = d3.selectAll('circle')
 var zOrders = {
-    radii: circles[0].map(function(cv) { return cv.r.baseVal.value; }),
+    radii: circles[0].map(function(cv) {
+        return cv.r.baseVal.value;
+    }),
 }
 
-console.log(circles)
+console.log(circles[0])
 
 circles.data(zOrders[setOrderBy]);
 
