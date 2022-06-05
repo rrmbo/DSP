@@ -122,7 +122,7 @@ h1 {
 }
 
 #credits {
-    text-align: right;
+    text-align: left;
     width: var(--infobox-width);
     padding: 50px;
     position: absolute;
