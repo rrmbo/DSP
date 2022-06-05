@@ -40,7 +40,7 @@ var x = d3.scaleTime()
     .range([0, width])
     .clamp(true);
 
-var y = (hour) => (fullHeight - 300 - (fullHeight - 300) * hour / 24) + halfHeight / 1.5;
+var y = (hour) => (fullHeight - 250 - (fullHeight - 250) * hour / 24) + halfHeight / 1.5;
 
 var slider = svgSlider.append("g")
     .attr("class", "slider")
