@@ -40,7 +40,7 @@ var x = d3.scaleTime()
     .range([0, width])
     .clamp(true);
 
-var y = (hour) => (fullHeight - 250 - (fullHeight - 250) * hour / 24) + halfHeight / 1.5;
+var y = (hour) => (fullHeight - 300 - (fullHeight - 300) * hour / 24) + halfHeight / 1.5;
 
 var slider = svgSlider.append("g")
     .attr("class", "slider")
@@ -156,6 +156,7 @@ function drawPlot(data) {
     var kaChing = d3.select("#vis")
         .append("svg")
         .attr("class", "kaching")
+        .style("fill-opacity", 0)
         .append("g")
         .html(`
             <path class="cls-1" d="M88.38,132.79c-.24-1.64-1.76-2.77-3.4-2.54-1.64,.24-2.77,1.76-2.54,3.4l1.7,11.63c.22,1.49,1.5,2.57,2.96,2.57,.14,0,.29,0,.44-.03,1.64-.24,2.77-1.76,2.54-3.4l-1.7-11.63Z"/>
@@ -197,10 +198,10 @@ function drawPlot(data) {
     var mousemove = function(d) {
         if (d3.select("#real").property("checked")) {
             PopUp
-                .html(d.statement + "<br><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
+                .html("<p>" + d.statement + "</p><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
         } else {
             PopUp
-                .html(d.text + "<br><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
+                .html("<p>" + d.text + "</p><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
         }
         kaChing
             .attr("transform", "translate (" + (d3.mouse(this)[0] + 70) + "," + (d3.mouse(this)[1]) + ")")
@@ -245,10 +246,22 @@ function drawPlot(data) {
 
 d3.select("#info-link")
     .attr("href", "#info-text")
-    .html('about &#8594;')
+    .html('about &#8594;');
 
-// if (d3.select("#info-link")) {
-// }
+document.addEventListener('scroll', function() {
+    // lastKnownScrollPosition = window.scrollX;
+
+    if (window.scrollX > 10) {
+        d3.select("#info-link")
+            .attr("href", "#body")
+            .html('&#8592; less');
+    } else {
+        d3.select("#info-link")
+            .attr("href", "#info-text")
+            .html('about &#8594;');
+    }
+});
+
 
 
 // update
@@ -258,6 +271,19 @@ d3.select("#trans")
 update();
 
 function update(h) {
+
+    // var circles = d3.selectAll('circle')
+
+    // var label = d3.select('svg').append('text')
+    //     .attr('transform', 'translate(' + [5, 100] + ')')
+
+    // var zOrders = {
+    //     radii: circles[0].map(function(cv) { return cv.r.baseVal.value; })
+    // }
+
+    // var setOrderBy = 'radii';
+    // var setOrder = d3.descending;
+
     // update position and text of label according to slider scale
     if (d3.select("#trans").property("checked")) {
         d3.selectAll(".location")
@@ -277,12 +303,10 @@ function update(h) {
         .attr("x", x(h))
         .text(formatDate(h));
 
-
-
     plot.selectAll(".location")
         .filter(function(d) { return d.timestamp > Date.parse(h) }) //select all the countries and prepare for a transition to new values
         .style("opacity", 0)
-        .attr("r", 0);
+        // .attr("r", 0);
 
     plot.selectAll(".location")
         .transition()
@@ -293,17 +317,10 @@ function update(h) {
         .attr("r", getExpenseValueZoom)
         .transition()
         .attr("r", getExpenseValue);
+
+
+
+    // label.text(setOrderBy);
+    // circles.data(zOrders[setOrderBy])
+    // circles.sort(setOrder);
 }
-
-var circles = d3.selectAll('circle')
-var zOrders = {
-    radii: circles[0].map(function(cv) {
-        return cv.r.baseVal.value;
-    }),
-}
-
-console.log(circles[0])
-
-circles.data(zOrders[setOrderBy]);
-
-circles.sort(setOrder);
