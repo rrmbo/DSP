@@ -84,7 +84,7 @@ slider
 
 var handle = slider.insert("circle", ".track-overlay")
     .attr("class", "handle")
-    .attr("r", 9);
+    .attr("r", 10);
 
 var label = slider.append("text")
     .attr("class", "label")
@@ -154,7 +154,9 @@ function drawPlot(data) {
         .attr("class", "popup");
 
     var kaChing = d3.select("#vis")
-        .append("svg")
+        .append("svg");
+
+    kaChing
         .attr("class", "kaching")
         .style("fill-opacity", 0)
         .append("g")
@@ -190,9 +192,11 @@ function drawPlot(data) {
 
     var mouseover = function() {
         PopUp
-            .style("opacity", 1);
+            .style("display", "block")
         kaChing
-            .style("fill-opacity", 1);
+            .style("fill-opacity", 1)
+            .duration(400)
+            .attr("transform", "scale (0.3)");
     }
 
     var mousemove = function(d) {
@@ -204,13 +208,13 @@ function drawPlot(data) {
                 .html("<p>" + d.text + "</p><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
         }
         kaChing
-            .attr("transform", "translate (" + (d3.mouse(this)[0] + 70) + "," + (d3.mouse(this)[1]) + ")")
+            .attr("transform", "translate (" + (d3.mouse(this)[0] - 40) + "," + (d3.mouse(this)[1] - 20) + ") scale (0.3)")
             // .attr("transform", "translate(0,0)")
     }
 
     var mouseleave = function() {
         PopUp
-            .style("opacity", 0)
+            .style("display", "none")
         kaChing
             .style("fill-opacity", 0)
     }
@@ -233,6 +237,10 @@ function drawPlot(data) {
         .style("stroke-width", 2)
         .style("fill-opacity", 1)
         .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave);
+
+    PopUp.on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave);
 
@@ -262,13 +270,15 @@ document.addEventListener('scroll', function() {
     }
 });
 
-
-
 // update
 
 d3.select("#trans")
     .on("change", update);
-update();
+// update();
+
+d3.select("#real")
+    .on("change", update);
+// update();
 
 function update(h) {
 
