@@ -18,7 +18,7 @@ body {
     width: var(--full-width);
     overflow-y: hidden;
     scroll-behavior: smooth;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 body,
@@ -185,7 +185,7 @@ h1 {
     top: 150px;
     width: 30vw;
     max-width: 500px;
-    padding: 0 10px 10px 50px;
+    padding: 0 1em 1em 50px;
     font-size: 1.5em;
     background-color: var(--white);
     border-radius: 10px;
