@@ -270,7 +270,7 @@ document.addEventListener('scroll', function() {
     } else {
         d3.select("#info-link")
             .attr("href", "#info-text")
-            .html('about &#8594;');
+            .html('more &#8594;');
     }
 });
 

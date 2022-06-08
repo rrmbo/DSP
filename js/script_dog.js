@@ -6,7 +6,6 @@ var formatDate = d3.timeFormat("%a %d");
 var parseDate = d3.timeParse("%d/%m/%y/%H:%M");
 // var parseTime = d3.timeParse("%H:%M");
 
-
 var startDate = new Date("2022-03-31"),
     endDate = new Date("2022-05-03");
 var getExpenseValue = function(d) {
