@@ -127,7 +127,7 @@ var label = slider.append("text")
 var svgPlot = d3.select("#vis")
     .append("svg")
     .attr("id", "canvas")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", fullWidth)
     .attr("height", height);
 
 var plot = svgPlot.append("g")

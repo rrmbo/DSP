@@ -19,6 +19,7 @@ body {
     overflow-y: hidden;
     scroll-behavior: smooth;
     font-size: 1em;
+    margin: 0;
 }
 
 body,
