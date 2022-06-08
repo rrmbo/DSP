@@ -10,7 +10,7 @@ var getExpenseValue = function(d) {
     return Math.sqrt(d.expense) * 3
 }
 var getExpenseValueZoom = function(d) {
-    return Math.sqrt(d.expense) * 3 * 1.2
+    return Math.sqrt(d.expense) * 3 * Math.random() * 2
 };
 
 // var zIndexExpense = function(d) {
