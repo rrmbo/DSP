@@ -9,6 +9,12 @@
     --infobox-width: 20vw;
     --full-width: calc(var(--window-width)+var(--infobox-width));
     --slider-height: 200px;
+    --iphone-se-w: 375px;
+    --iphone-se-h: 667px;
+    --iphone-xr-w: 414px;
+    --iphone-xr-h: 896px;
+    --iphone-12pro-w: 390px;
+    --iphone-12pro-h: 844px;
 }
 
 body {
@@ -203,20 +209,13 @@ h1 {
     margin-block-end: 0.5em;
 }
 
-.kaching {
-    position: fixed;
-    left: 0;
-    top: 0;
-    /* transform: translate(0, 0); */
-}
-
 #switch {
     font-family: 'Caveat', cursive;
     font-size: 1.5em;
 }
 
 #instructions {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-family: 'Caveat', cursive;
     text-align: center;
     padding: 50px;
@@ -225,6 +224,9 @@ h1 {
     bottom: 120px;
     transform: rotate(-10deg);
 }
+
+
+/*         media fixes         */
 
 @media only screen and (max-width: 1600px) {
     body {
@@ -236,7 +238,43 @@ h1 {
     body {
         font-size: 2em;
     }
-    .kaching {
-        display: none!important;
+}
+
+
+/*         fuck you iOS         */
+
+@media all and (device-width: var(--iphone-se-w)) and (device-height: var(--iphone-se-h)) {
+    body {
+        font-size: 2em;
+    }
+    body,
+    #vis,
+    #vis #canvas {
+        width: var(--iphone-se-w);
+        height: var(--iphone-se-h);
+    }
+}
+
+@media all and (device-width: var(--iphone-xr-w)) and (device-height: var(--iphone-xr-h)) {
+    body {
+        font-size: 2em;
+    }
+    body,
+    #vis,
+    #vis #canvas {
+        width: var(--iphone-xr-w);
+        height: var(--iphone-xr-h);
+    }
+}
+
+@media all and (device-width: var(--iphone-12pro-w)) and (device-height: var(--iphone-12pro-h)) {
+    body {
+        font-size: 2em;
+    }
+    body,
+    #vis,
+    #vis #canvas {
+        width: var(--iphone-12pro-w);
+        height: var(--iphone-12pro-h);
     }
 }
