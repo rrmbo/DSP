@@ -208,7 +208,8 @@ h1 {
     /* transform: translate(0, 0); */
 }
 
-#real-check {
+#real-check,
+#switch {
     font-family: 'Caveat', cursive;
     font-size: 1.2em;
 }

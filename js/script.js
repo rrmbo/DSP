@@ -322,7 +322,7 @@ function update(h) {
         .transition()
         .attr("r", getExpenseValue);
 
-    ////////// reorder circles //////////
+    ////////// re-order circles //////////
 
     // var circles = d3.selectAll('.location')
     // if (circles._groups[0].length > 0) {

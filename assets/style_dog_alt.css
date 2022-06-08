@@ -8,7 +8,6 @@
     --window-width: 100vw;
     --infobox-width: 20vw;
     --full-width: calc(var(--window-width)+var(--infobox-width));
-    --slider-height: 200px;
 }
 
 body {
@@ -17,13 +16,11 @@ body {
     color: var(--black);
     width: var(--full-width);
     overflow-y: hidden;
-    scroll-behavior: smooth;
-    font-size: 1em;
 }
 
 body,
 #vis,
-#vis #canvas {
+#vis svg {
     height: 100vh;
 }
 
@@ -39,23 +36,11 @@ input[type="checkbox" i] {
 }
 
 #title {
-    position: fixed;
+    position: absolute;
     left: 50px;
     top: 50px;
     font-size: 4em;
     font-weight: 900;
-}
-
-a,
-a:visited {
-    color: var(--black);
-    text-decoration: none;
-}
-
-#back-link {
-    font-size: 1.5em;
-    line-height: 1.5em;
-    font-weight: 500;
 }
 
 #index {
@@ -104,6 +89,7 @@ a:visited {
 
 #info-text {
     width: var(--infobox-width);
+    height: 100vh;
     padding: 50px;
     position: absolute;
     left: var(--window-width);
@@ -112,18 +98,13 @@ a:visited {
 
 #info-text p {
     margin-top: 0;
-    font-size: 1.6em;
+    font-size: 2em;
     font-weight: 100;
     line-height: 1.2em;
 }
 
-h1 {
-    margin-top: 0;
-    font-size: 1.6em;
-}
-
 #credits {
-    text-align: left;
+    text-align: right;
     width: var(--infobox-width);
     padding: 50px;
     position: absolute;
@@ -155,7 +136,7 @@ h1 {
     display: block;
     content: "";
     width: 100%;
-    height: 30px;
+    height: 30pxpx;
     background-color: #000;
 } */
 
@@ -166,56 +147,11 @@ h1 {
 
 .track-overlay {
     pointer-events: stroke;
-    stroke-width: 100px;
+    stroke-width: 50px;
     stroke: transparent;
     cursor: crosshair;
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 10px;
 }
 
 .handle {
     fill: var(--black);
-}
-
-.popup {
-    /* opacity: 0; */
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 150px;
-    width: 30vw;
-    max-width: 500px;
-    padding: 0 1em 1em 50px;
-    font-size: 1.5em;
-    background-color: var(--white);
-    border-radius: 10px;
-}
-
-.popup h1 {
-    font-family: Helvetica, sans-serif !important;
-    font-size: 1em;
-    font-weight: 700;
-}
-
-.popup p {
-    margin-block-end: 0.5em;
-}
-
-.kaching {
-    position: fixed;
-    left: 0;
-    top: 0;
-    /* transform: translate(0, 0); */
-}
-
-#real-check {
-    font-family: 'Caveat', cursive;
-    font-size: 1.2em;
-}
-
-@media only screen and (max-width: 1600px) {
-    body {
-        font-size: 0.7em;
-    }
 }
