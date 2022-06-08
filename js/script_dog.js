@@ -26,7 +26,7 @@ var margin = {
     halfWidth = window.innerWidth / 2,
     halfHeight = window.innerHeight / 2;
 
-var ScreenRatioScale = (fullHeight + fullWidth) / 300;
+var ScreenRatioScale = (fullHeight + fullWidth) / 400;
 
 function genString(d) {
     // return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + d.expense / 10 + ")"
