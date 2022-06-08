@@ -7,10 +7,10 @@ var parseDate = d3.timeParse("%d/%m/%y/%H:%M");
 var startDate = new Date("2022-03-31"),
     endDate = new Date("2022-05-03");
 var getExpenseValue = function(d) {
-    return Math.sqrt(d.expense) * 3
+    return Math.sqrt(d.expense) * ScreenRatioScale
 }
 var getExpenseValueZoom = function(d) {
-    return Math.sqrt(d.expense) * 3 * Math.random() * 2
+    return Math.sqrt(d.expense) * ScreenRatioScale * Math.random() * 2
 };
 
 // var zIndexExpense = function(d) {
@@ -26,8 +26,13 @@ var margin = {
     width = window.innerWidth - margin.left - margin.right,
     height = 200 - margin.top - margin.bottom,
     fullHeight = window.innerHeight - height,
+    fullWidth = window.innerWidth,
     halfWidth = window.innerWidth / 2,
     halfHeight = window.innerHeight / 2;
+
+var ScreenRatioScale = (fullHeight + fullWidth) / 500;
+
+console.log(ScreenRatioScale);
 
 // var plotMarginX = 200,
 //     plotMarginy = 200,

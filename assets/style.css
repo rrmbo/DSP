@@ -235,4 +235,7 @@ h1 {
     body {
         font-size: 2em;
     }
+    .kaching {
+        display: none!important;
+    }
 }
