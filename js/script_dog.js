@@ -1,3 +1,5 @@
+////////// data //////////
+
 var dataset;
 
 var formatDateIntoDay = d3.timeFormat("%d");
@@ -6,12 +8,15 @@ var parseDate = d3.timeParse("%d/%m/%y/%H:%M");
 
 var startDate = new Date("2022-03-31"),
     endDate = new Date("2022-05-03");
+
 var getExpenseValue = function(d) {
     return Math.sqrt(d.expense) * 3
 }
 var getExpenseValueZoom = function(d) {
     return Math.sqrt(d.expense) * 3 * Math.random() * 2
 };
+
+////////// measures //////////
 
 var margin = {
         top: 0,
@@ -28,9 +33,16 @@ var margin = {
 
 var ScreenRatioScale = (fullHeight + fullWidth) / 400;
 
-function genString(d) {
+////////// generate position //////////
+
+function genPos(d) {
     // return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + d.expense / 10 + ")"
     return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + Math.sqrt(Math.sqrt(d.expense / ScreenRatioScale)) + ")"
+}
+
+function genPosStart(d) {
+    // return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + d.expense / 10 + ")"
+    return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(0)";
 }
 
 console.log(ScreenRatioScale);
@@ -185,7 +197,7 @@ function drawPlot(data) {
         .enter()
         .append("g")
         .attr("class", "location")
-        .attr("transform", genString)
+        .attr("transform", genPosStart)
         // .attr("viewBox", "0 0 300 300")
         .attr("width", getExpenseValue)
         .attr("height", getExpenseValue)
@@ -261,11 +273,6 @@ function update(h) {
 
     var indexColors = d3.selectAll(".index-color-circle")
 
-    function genString(d) {
-        // return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + d.expense / 10 + ")"
-        return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + Math.sqrt(Math.sqrt(d.expense / ScreenRatioScale)) + ")"
-    }
-
     indexColors
         .style("background-color", randomColorDyn);
 
@@ -277,15 +284,13 @@ function update(h) {
 
     plot.selectAll(".location")
         .filter(function(d) { return d.timestamp > Date.parse(h) }) //select all the countries and prepare for a transition to new values
+        .attr("transform", genPosStart)
         .style("opacity", 0)
-        // .attr("r", 0);
 
     plot.selectAll(".location")
-        // .transition()
         .filter(function(d) { return d.timestamp <= Date.parse(h) }) //select all the countries and prepare for a transition to new values
-        // .duration(400)
         .transition()
         .duration(200)
-        .attr("transform", genString)
+        .attr("transform", genPos)
         .style("opacity", 1);
 }

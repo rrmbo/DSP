@@ -13,7 +13,6 @@
 
 body {
     font-family: "helvetia", Arial, sans-serif;
-    font-size: 12px;
     color: var(--black);
     width: var(--full-width);
     overflow-y: hidden;
@@ -25,7 +24,9 @@ body {
 body,
 #vis,
 #vis #canvas {
+    min-height: 100vh;
     height: 100vh;
+    min-height: -webkit-fill-available;
 }
 
 .divider {
