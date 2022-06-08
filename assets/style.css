@@ -192,7 +192,9 @@ h1 {
 }
 
 .popup h1 {
+    font-family: Helvetica, sans-serif !important;
     font-size: 1em;
+    font-weight: 700;
 }
 
 .popup p {
@@ -206,8 +208,13 @@ h1 {
     /* transform: translate(0, 0); */
 }
 
+#real-check {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2em;
+}
+
 @media only screen and (max-width: 1600px) {
     body {
-        font-size: 1em;
+        font-size: 0.85em;
     }
 }

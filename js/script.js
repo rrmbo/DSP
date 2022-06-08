@@ -11,10 +11,11 @@ var getExpenseValue = function(d) {
 }
 var getExpenseValueZoom = function(d) {
     return Math.sqrt(d.expense) * 3 * 1.2
-}
-var zIndexExpense = function(d) {
-    return 999 - (Math.round(d.expense / 3))
-}
+};
+
+// var zIndexExpense = function(d) {
+//     return 999 - (Math.round(d.expense / 3))
+// }
 
 var margin = {
         top: 0,
@@ -27,6 +28,30 @@ var margin = {
     fullHeight = window.innerHeight - height,
     halfWidth = window.innerWidth / 2,
     halfHeight = window.innerHeight / 2;
+
+// var plotMarginX = 200,
+//     plotMarginy = 200,
+//     maxPlotHeight = fullHeight - plotMarginy * 5 / 4,
+//     maxPlotWidth = width - 2 * plotMarginX;
+
+////////// colors //////////
+
+let black = "#000000",
+    red = "#ff3333",
+    rose = "#ffcccc",
+    violet = "#663399",
+    navy = "#000066";
+
+var colors = {
+    "bills": black,
+    "items": rose,
+    "food": red,
+    "clothes": violet,
+    "travel": navy,
+}
+
+// var colors = [black, red, rose, violet, navy];
+
 
 ////////// slider //////////
 
@@ -104,6 +129,7 @@ var plot = svgPlot.append("g")
     .attr("class", "plot")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+////////// csv //////////
 
 d3.csv("/assets/data/expenses_max.csv", prepare, function(data) {
     dataset = data;
@@ -117,37 +143,14 @@ function prepare(d) {
     d.type = d.type
     d.timestamp = Date.parse(d.date);
     d.xpos = parseInt(x(d.date));
-    //console.log(d.x)
-
     return d;
 }
+
+////////// draw plot //////////
 
 function drawPlot(data) {
     var locations = plot.selectAll(".location")
         .data(data);
-
-    // var plotMarginX = 200,
-    //     plotMarginy = 200,
-    //     maxPlotHeight = fullHeight - plotMarginy * 5 / 4,
-    //     maxPlotWidth = width - 2 * plotMarginX;
-
-    // Colors
-
-    let black = "#000000",
-        red = "#ff3333",
-        rose = "#ffcccc",
-        violet = "#663399",
-        navy = "#000066";
-
-    var colors = {
-        "bills": black,
-        "items": rose,
-        "food": red,
-        "clothes": violet,
-        "travel": navy,
-    }
-
-    // var colors = [black, red, rose, violet, navy];
 
     var PopUp = d3.select("#vis")
         .append("div")
@@ -158,7 +161,7 @@ function drawPlot(data) {
 
     kaChing
         .attr("class", "kaching")
-        .style("fill-opacity", 0)
+        .style("display", "none")
         .append("g")
         .html(`
             <path class="cls-1" d="M88.38,132.79c-.24-1.64-1.76-2.77-3.4-2.54-1.64,.24-2.77,1.76-2.54,3.4l1.7,11.63c.22,1.49,1.5,2.57,2.96,2.57,.14,0,.29,0,.44-.03,1.64-.24,2.77-1.76,2.54-3.4l-1.7-11.63Z"/>
@@ -194,32 +197,35 @@ function drawPlot(data) {
         PopUp
             .style("display", "block")
         kaChing
-            .style("fill-opacity", 1)
-            .duration(400)
-            .attr("transform", "scale (0.3)");
+            .style("display", "block")
     }
 
     var mousemove = function(d) {
         if (d3.select("#real").property("checked")) {
             PopUp
-                .html("<p>" + d.statement + "</p><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
+                .style("font-family", "Caveat")
+                .style("font-size", "1.7em")
+                .html("<p>«" + d.statement + "»</p><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
         } else {
             PopUp
+                .style("font-family", "helvetica")
+                .style("font-size", "1.5em")
                 .html("<p>" + d.text + "</p><h1>CHF " + d3.format(",.2f")(d.expense) + "</h1>");
         }
         kaChing
-            .attr("transform", "translate (" + (d3.mouse(this)[0] - 40) + "," + (d3.mouse(this)[1] - 20) + ") scale (0.3)")
-            // .attr("transform", "translate(0,0)")
+            .attr("transform", "translate (" + (d3.mouse(this)[0] - window.scrollX) + "," + (d3.mouse(this)[1]) + ") scale (0.5)")
+            // .attr({
+            //     width: 1 + "em",
+            //     height: 1 + "em"
+            // });
     }
 
     var mouseleave = function() {
         PopUp
             .style("display", "none")
         kaChing
-            .style("fill-opacity", 0)
+            .style("display", "none")
     }
-
-    // if filtered dataset has more circles than already existing, transition new ones in
 
     locations
         .enter()
@@ -235,7 +241,6 @@ function drawPlot(data) {
         .style("fill", (d) => colors[d.type])
         .style("stroke", (d) => colors[d.type])
         .style("stroke-width", 2)
-        .style("fill-opacity", 1)
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave);
@@ -244,13 +249,12 @@ function drawPlot(data) {
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave);
 
-    // if filtered dataset has less circles than already existing, remove excess
     locations
         .exit()
         .remove();
 }
 
-// linking
+////////// linking //////////
 
 d3.select("#info-link")
     .attr("href", "#info-text")
@@ -270,39 +274,29 @@ document.addEventListener('scroll', function() {
     }
 });
 
-// update
+////////// update //////////
 
 d3.select("#trans")
     .on("change", update);
-// update();
 
-d3.select("#real")
-    .on("change", update);
+// d3.select("#real")
+//     .on("change", update);
 // update();
 
 function update(h) {
 
-    // var circles = d3.selectAll('circle')
-
     // var label = d3.select('svg').append('text')
     //     .attr('transform', 'translate(' + [5, 100] + ')')
-
-    // var zOrders = {
-    //     radii: circles[0].map(function(cv) { return cv.r.baseVal.value; })
-    // }
-
-    // var setOrderBy = 'radii';
-    // var setOrder = d3.descending;
 
     // update position and text of label according to slider scale
     if (d3.select("#trans").property("checked")) {
         d3.selectAll(".location")
-            .style("fill-opacity", 0);
+            .style("fill", "none");
         // d3.selectAll(".popup")
         //     .style("background-color", "unset")
     } else {
         d3.selectAll(".location")
-            .style("fill-opacity", 1);
+            .style("fill", (d) => colors[d.type]);
         // d3.selectAll(".popup")
         //     .style("background-color", "var--(white)")
     }
@@ -328,9 +322,14 @@ function update(h) {
         .transition()
         .attr("r", getExpenseValue);
 
+    ////////// reorder circles //////////
 
+    // var circles = d3.selectAll('.location')
+    // if (circles._groups[0].length > 0) {
+    //     var radii = [circles._groups[0]].map(function(cv) { return parseFloat(cv.__data__.expense); });
+    //     var setOrder = d3.descending;
 
-    // label.text(setOrderBy);
-    // circles.data(zOrders[setOrderBy])
-    // circles.sort(setOrder);
+    //     circles.data(radii)
+    //     circles.sort(setOrder);
+    // }
 }

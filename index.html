@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <script src="/js/d3/dist/d3.v4.min.js"></script>
     <link rel="stylesheet" href="/assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 
 <body id="body">
@@ -28,8 +31,8 @@
         <p>Have a look at my spending over the duration of a month.</p>
         <p>There is a bubble for every single expense, but there are a lot of days where I didn't spend anything. The bigger the bubble (exponentially increasing) the deeper the hole in my bank account after.</p>
         <hr class="divider">
-        <input type="checkbox" id="real">More depth<br>
-        <input type="checkbox" id="trans">More transparency
+        <span><input type="checkbox" id="trans">Hidden cost</span><br>
+        <span id="real-check"><input type="checkbox" id="real">Keeping it real</span>
     </div>
     <div id="credits">
         WORK IN PROGRESS<br>project by Ruben Borer
