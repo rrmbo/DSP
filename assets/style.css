@@ -211,7 +211,18 @@ h1 {
 #real-check,
 #switch {
     font-family: 'Caveat', cursive;
-    font-size: 1.2em;
+    font-size: 1.3em;
+}
+
+#instructions {
+    font-size: 2em;
+    font-family: 'Caveat', cursive;
+    text-align: center;
+    padding: 50px;
+    position: fixed;
+    left: 0;
+    bottom: 120px;
+    transform: rotate(-10deg);
 }
 
 @media only screen and (max-width: 1600px) {
