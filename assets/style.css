@@ -230,3 +230,9 @@ h1 {
         font-size: 0.7em;
     }
 }
+
+@media only screen and (max-width: 450px) {
+    body {
+        font-size: 1.2em;
+    }
+}
