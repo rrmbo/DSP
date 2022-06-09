@@ -1,287 +1,287 @@
-           :root {
-              --white: #fff;
-              --black: #000;
-              --red: #ff3333;
-              --rose: #ffcccc;
-              --violet: #663399;
-              --navy: #000066;
-              --window-width: 100vw;
-              --infobox-width: 20vw;
-              --full-width: calc(var(--window-width)+var(--infobox-width));
-              --slider-height: 200px;
-              --iphone-se-w: 375px;
-              --iphone-se-h: 667px;
-              --iphone-xr-w: 414px;
-              --iphone-xr-h: 896px;
-              --iphone-12pro-w: 390px;
-              --iphone-12pro-h: 844px;
-          }
-          
-          body {
-              font-family: "helvetia", Arial, sans-serif;
-              color: var(--black);
-              width: var(--full-width);
-              overflow-y: hidden;
-              scroll-behavior: smooth;
-              font-size: 1em;
-              margin: 0;
-          }
-          
-          body,
-          #vis,
-          #vis #canvas {
-              min-height: 100vh;
-              height: 100vh;
-              min-height: -webkit-fill-available;
-          }
-          
-          .divider {
-              border-bottom: 2px solid var(--black);
-          }
-          
-          input[type="checkbox" i] {
-              margin: 0.5em 0.5em 0 0;
-              height: 1em;
-              width: 1em;
-              border-radius: 50%;
-          }
-          
-          #title {
-              position: fixed;
-              left: 50px;
-              top: 50px;
-              font-size: 4em;
-              font-weight: 900;
-          }
-          
-          a,
-          a:visited {
-              color: var(--black);
-              text-decoration: none;
-          }
-          
-          #back-link {
-              font-size: 1.5em;
-              line-height: 1.5em;
-              font-weight: 500;
-          }
-          
-          #index {
-              position: absolute;
-              right: 50px;
-              top: 50px;
-              font-size: 1.5em;
-              line-height: 1.5em;
-              text-align: right;
-              font-weight: 500;
-          }
-          
-          #index span {
-              display: block;
-          }
-          
-          .index-color::after {
-              content: "";
-              display: inline-block;
-              margin-left: 0.5em;
-              transform: translateY(0.1em);
-              height: 1em;
-              width: 1em;
-              border-radius: 50%;
-          }
-          
-          #index-1::after {
-              background-color: var(--black);
-          }
-          
-          #index-2::after {
-              background-color: var(--rose);
-          }
-          
-          #index-3::after {
-              background-color: var(--red);
-          }
-          
-          #index-4::after {
-              background-color: var(--violet);
-          }
-          
-          #index-5::after {
-              background-color: var(--navy);
-          }
-          
-          #info-text {
-              width: var(--infobox-width);
-              padding: 50px;
-              position: absolute;
-              left: var(--window-width);
-              top: 0;
-          }
-          
-          #info-text p {
-              margin-top: 0;
-              font-size: 1.6em;
-              font-weight: 100;
-              line-height: 1.2em;
-          }
-          
-          h1 {
-              margin-top: 0;
-              font-size: 1.6em;
-          }
-          
-          #credits {
-              text-align: left;
-              width: var(--infobox-width);
-              padding: 50px;
-              position: absolute;
-              left: var(--window-width);
-              bottom: 0;
-          }
-          
-          #slider {
-              position: absolute;
-              bottom: 0;
-          }
-          
-          .ticks {
-              font-size: 10px;
-          }
-          
-          .track,
-          .track-inset,
-          .track-overlay {
-              stroke-linecap: round;
-          }
-          
-          .track {
-              stroke-width: 2px;
-          }
-          
-          .track-inset {
-              stroke: var(--black);
-              stroke-width: 2px;
-          }
-          
-          .track-overlay {
-              pointer-events: stroke;
-              stroke-width: 100px;
-              stroke: transparent;
-              cursor: crosshair;
-              background-color: var(--white);
-              border-radius: 10px;
-              padding: 10px;
-          }
-          
-          .handle {
-              fill: var(--black);
-          }
-          
-          .popup {
-              /* opacity: 0; */
-              position: fixed;
-              left: 0;
-              top: 150px;
-              width: 30vw;
-              max-width: 500px;
-              padding: 0 1em 1em 50px;
-              font-size: 1.5em;
-              background-color: var(--white);
-              border-radius: 10px;
-          }
-          
-          .popup h1 {
-              font-family: Helvetica, sans-serif !important;
-              font-size: 1em;
-              font-weight: 700;
-          }
-          
-          .popup p {
-              margin-block-end: 0.5em;
-          }
-          
-          .kaching {
-              position: fixed;
-              left: 0;
-              top: 0;
-              /* transform: translate(0, 0); */
-          }
-          
-          #real-check,
-          #switch {
-              font-family: 'Caveat', cursive;
-              font-size: 1.5em;
-          }
-          
-          #instructions {
-              font-size: 1.5em;
-              font-family: 'Caveat', cursive;
-              text-align: center;
-              padding: 50px;
-              position: fixed;
-              left: 0;
-              bottom: 120px;
-              transform: rotate(-10deg);
-          }
-          /*         media fixes         */
-          
-          @media only screen and (max-width: 1600px) {
-              body {
-                  font-size: 0.7em;
-              }
-          }
-          
-          @media only screen and (max-width: 450px) {
-              body {
-                  font-size: 40px;
-              }
-              .kaching {
-                  display: none!important;
-              }
-          }
-          /*         fuck you iOS         */
-          
-          @media all and (device-width: var(--iphone-se-w)) and (device-height: var(--iphone-se-h)) {
-              body {
-                  font-size: 2em;
-              }
-              body,
-              #vis,
-              #vis #canvas {
-                  width: var(--iphone-se-w);
-                  height: var(--iphone-se-h);
-              }
-              .kaching {
-                  display: none!important;
-              }
-          }
-          
-          @media all and (device-width: var(--iphone-xr-w)) and (device-height: var(--iphone-xr-h)) {
-              body {
-                  font-size: 2em;
-              }
-              body,
-              #vis,
-              #vis #canvas {
-                  width: var(--iphone-xr-w);
-                  height: var(--iphone-xr-h);
-              }
-              .kaching {
-                  display: none!important;
-              }
-          }
-          
-          @media all and (device-width: var(--iphone-12pro-w)) and (device-height: var(--iphone-12pro-h)) {
-              body {
-                  font-size: 2em;
-              }
-              body,
-              #vis,
-              #vis #canvas {
-                  width: var(--iphone-12pro-w);
-                  height: var(--iphone-12pro-h);
-              }
-              .kaching {
-                  display: none!important;
-              }
-          }
+            :root {
+               --white: #fff;
+               --black: #000;
+               --red: #ff3333;
+               --rose: #ffcccc;
+               --violet: #663399;
+               --navy: #000066;
+               --window-width: 100vw;
+               --infobox-width: 20vw;
+               --full-width: calc(var(--window-width)+var(--infobox-width));
+               --slider-height: 200px;
+               --iphone-se-w: calc(375px *1.2);
+               --iphone-se-h: 667px;
+               --iphone-xr-w: calc(414px *1.2);
+               --iphone-xr-h: 896px;
+               --iphone-12pro-w: calc(390px*1.2);
+               --iphone-12pro-h: 844px;
+           }
+           
+           body {
+               font-family: "helvetia", Arial, sans-serif;
+               color: var(--black);
+               width: var(--full-width);
+               overflow-y: hidden;
+               scroll-behavior: smooth;
+               font-size: 1em;
+               margin: 0;
+           }
+           
+           body,
+           #vis,
+           #vis #canvas {
+               min-height: 100vh;
+               height: 100vh;
+               min-height: -webkit-fill-available;
+           }
+           
+           .divider {
+               border-bottom: 2px solid var(--black);
+           }
+           
+           input[type="checkbox" i] {
+               margin: 0.5em 0.5em 0 0;
+               height: 1em;
+               width: 1em;
+               border-radius: 50%;
+           }
+           
+           #title {
+               position: fixed;
+               left: 50px;
+               top: 50px;
+               font-size: 4em;
+               font-weight: 900;
+           }
+           
+           a,
+           a:visited {
+               color: var(--black);
+               text-decoration: none;
+           }
+           
+           #back-link {
+               font-size: 1.5em;
+               line-height: 1.5em;
+               font-weight: 500;
+           }
+           
+           #index {
+               position: absolute;
+               right: 50px;
+               top: 50px;
+               font-size: 1.5em;
+               line-height: 1.5em;
+               text-align: right;
+               font-weight: 500;
+           }
+           
+           #index span {
+               display: block;
+           }
+           
+           .index-color::after {
+               content: "";
+               display: inline-block;
+               margin-left: 0.5em;
+               transform: translateY(0.1em);
+               height: 1em;
+               width: 1em;
+               border-radius: 50%;
+           }
+           
+           #index-1::after {
+               background-color: var(--black);
+           }
+           
+           #index-2::after {
+               background-color: var(--rose);
+           }
+           
+           #index-3::after {
+               background-color: var(--red);
+           }
+           
+           #index-4::after {
+               background-color: var(--violet);
+           }
+           
+           #index-5::after {
+               background-color: var(--navy);
+           }
+           
+           #info-text {
+               width: var(--infobox-width);
+               padding: 50px;
+               position: absolute;
+               left: var(--window-width);
+               top: 0;
+           }
+           
+           #info-text p {
+               margin-top: 0;
+               font-size: 1.6em;
+               font-weight: 100;
+               line-height: 1.2em;
+           }
+           
+           h1 {
+               margin-top: 0;
+               font-size: 1.6em;
+           }
+           
+           #credits {
+               text-align: left;
+               width: var(--infobox-width);
+               padding: 50px;
+               position: absolute;
+               left: var(--window-width);
+               bottom: 0;
+           }
+           
+           #slider {
+               position: absolute;
+               bottom: 0;
+           }
+           
+           .ticks {
+               font-size: 10px;
+           }
+           
+           .track,
+           .track-inset,
+           .track-overlay {
+               stroke-linecap: round;
+           }
+           
+           .track {
+               stroke-width: 2px;
+           }
+           
+           .track-inset {
+               stroke: var(--black);
+               stroke-width: 2px;
+           }
+           
+           .track-overlay {
+               pointer-events: stroke;
+               stroke-width: 100px;
+               stroke: transparent;
+               cursor: crosshair;
+               background-color: var(--white);
+               border-radius: 10px;
+               padding: 10px;
+           }
+           
+           .handle {
+               fill: var(--black);
+           }
+           
+           .popup {
+               /* opacity: 0; */
+               position: fixed;
+               left: 0;
+               top: 150px;
+               width: 30vw;
+               max-width: 500px;
+               padding: 0 1em 1em 50px;
+               font-size: 1.5em;
+               background-color: var(--white);
+               border-radius: 10px;
+           }
+           
+           .popup h1 {
+               font-family: Helvetica, sans-serif !important;
+               font-size: 1em;
+               font-weight: 700;
+           }
+           
+           .popup p {
+               margin-block-end: 0.5em;
+           }
+           
+           .kaching {
+               position: fixed;
+               left: 0;
+               top: 0;
+               /* transform: translate(0, 0); */
+           }
+           
+           #real-check,
+           #switch {
+               font-family: 'Caveat', cursive;
+               font-size: 1.5em;
+           }
+           
+           #instructions {
+               font-size: 1.5em;
+               font-family: 'Caveat', cursive;
+               text-align: center;
+               padding: 50px;
+               position: fixed;
+               left: 0;
+               bottom: 120px;
+               transform: rotate(-10deg);
+           }
+           /*         media fixes         */
+           
+           @media only screen and (max-width: 1600px) {
+               body {
+                   font-size: 0.7em;
+               }
+           }
+           
+           @media only screen and (max-width: 450px) {
+               body {
+                   font-size: 40px;
+               }
+               .kaching {
+                   display: none!important;
+               }
+           }
+           /*         fuck you iOS         */
+           
+           @media all and (device-width: var(--iphone-se-w)) and (device-height: var(--iphone-se-h)) {
+               body {
+                   font-size: 2em;
+               }
+               body,
+               #vis,
+               #vis #canvas {
+                   width: var(--iphone-se-w);
+                   height: var(--iphone-se-h);
+               }
+               .kaching {
+                   display: none!important;
+               }
+           }
+           
+           @media all and (device-width: var(--iphone-xr-w)) and (device-height: var(--iphone-xr-h)) {
+               body {
+                   font-size: 2em;
+               }
+               body,
+               #vis,
+               #vis #canvas {
+                   width: var(--iphone-xr-w);
+                   height: var(--iphone-xr-h);
+               }
+               .kaching {
+                   display: none!important;
+               }
+           }
+           
+           @media all and (device-width: var(--iphone-12pro-w)) and (device-height: var(--iphone-12pro-h)) {
+               body {
+                   font-size: 2em;
+               }
+               body,
+               #vis,
+               #vis #canvas {
+                   width: var(--iphone-12pro-w);
+                   height: var(--iphone-12pro-h);
+               }
+               .kaching {
+                   display: none!important;
+               }
+           }
