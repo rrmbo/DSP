@@ -57,6 +57,13 @@ var colors = {
 
 // var colors = [black, red, rose, violet, navy];
 
+////////// body //////////
+
+var body = d3.select("body");
+
+body
+    .style("width", fullWidth)
+    .style("height", fullHeight);
 
 ////////// slider //////////
 

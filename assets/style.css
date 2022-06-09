@@ -6,6 +6,7 @@
     --violet: #663399;
     --navy: #000066;
     --window-width: 100vw;
+    --window-height: 100vh;
     --infobox-width: 20vw;
     --full-width: calc(var(--window-width)+var(--infobox-width));
     --slider-height: 200px;
@@ -23,7 +24,7 @@
 body {
     font-family: "helvetia", Arial, sans-serif;
     color: var(--black);
-    width: var(--full-width);
+    width: var(--window-width);
     overflow-y: hidden;
     scroll-behavior: smooth;
     font-size: 1em;
@@ -33,8 +34,8 @@ body {
 body,
 #vis,
 #vis #canvas {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: var(--window-height);
+    height: var(--window-height);
     min-height: -webkit-fill-available;
 }
 
@@ -251,7 +252,8 @@ h1 {
 
 /*         fuck you iOS         */
 
-@media all and (device-width: var(--iphone-se-w)) and (device-height: var(--iphone-se-h)) {
+
+/* @media all and (device-width: var(--iphone-se-w)) and (device-height: var(--iphone-se-h)) {
     body {
         font-size: 2em;
     }
@@ -294,39 +296,10 @@ h1 {
     .kaching {
         display: none!important;
     }
-}
+} */
 
-@media all and (device-width: 414px) and (device-height: 896px) {
-    body {
-        font-size: 24px;
-    }
-    body,
-    #vis,
-    #vis #canvas {
-        width: 414px;
-        height: 896px;
-    }
-    .kaching {
-        display: none!important;
-    }
-}
 
-@media all and (width: 414px) and (height: 896px) {
-    body {
-        font-size: 24px;
-    }
-    body,
-    #vis,
-    #vis #canvas {
-        width: 414px;
-        height: 896px;
-    }
-    .kaching {
-        display: none!important;
-    }
-}
-
-@media all and (width: 828px) and (height: 1792px) {
+/* @media all and (width: 828px) and (height: 1792px) {
     body {
         font-size: 24px;
     }
@@ -339,4 +312,4 @@ h1 {
     .kaching {
         display: none!important;
     }
-}
+} */
