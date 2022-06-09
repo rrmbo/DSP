@@ -295,3 +295,48 @@ h1 {
         display: none!important;
     }
 }
+
+@media all and (device-width: 414px) and (device-height: 896px) {
+    body {
+        font-size: 24px;
+    }
+    body,
+    #vis,
+    #vis #canvas {
+        width: 414px;
+        height: 896px;
+    }
+    .kaching {
+        display: none!important;
+    }
+}
+
+@media all and (width: 414px) and (height: 896px) {
+    body {
+        font-size: 24px;
+    }
+    body,
+    #vis,
+    #vis #canvas {
+        width: 414px;
+        height: 896px;
+    }
+    .kaching {
+        display: none!important;
+    }
+}
+
+@media all and (width: 828px) and (height: 1792px) {
+    body {
+        font-size: 24px;
+    }
+    body,
+    #vis,
+    #vis #canvas {
+        width: 828px;
+        height: 1792px;
+    }
+    .kaching {
+        display: none!important;
+    }
+}
