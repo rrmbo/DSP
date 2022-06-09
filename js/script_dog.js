@@ -1,5 +1,3 @@
-////////// data //////////
-
 var dataset;
 
 var formatDateIntoDay = d3.timeFormat("%d");
@@ -33,6 +31,8 @@ var margin = {
 
 var ScreenRatioScale = (fullHeight + fullWidth) / 400;
 
+var indexColors = d3.selectAll(".index-color-circle")
+
 ////////// generate position //////////
 
 function genPos(d) {
@@ -40,8 +40,7 @@ function genPos(d) {
     return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + Math.sqrt(Math.sqrt(d.expense / ScreenRatioScale)) + ")"
 }
 
-function genPosStart(d) {
-    // return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(" + d.expense / 10 + ")"
+function genPosStart() {
     return "translate (" + Math.random() * (width - 200) + 100 + "," + Math.random() * fullHeight + 100 + ") rotate(" + Math.random() * 360 + ") scale(0)";
 }
 
@@ -62,6 +61,16 @@ var colors = {
     "clothes": violet,
     "travel": navy,
 }
+
+// var colors = [black, red, rose, violet, navy];
+
+////////// body //////////
+
+// var body = d3.select("body");
+
+// body
+//     .style("width", fullWidth)
+//     .style("height", fullHeight);
 
 ////////// slider //////////
 
@@ -193,6 +202,9 @@ function drawPlot(data) {
         return '#' + n.slice(0, 6);
     };
 
+    indexColors
+        .style("background-color", randomColor);
+
     locations
         .enter()
         .append("g")
@@ -228,7 +240,7 @@ function drawPlot(data) {
 
 d3.select("#info-link")
     .attr("href", "#info-text")
-    .html('about &#8594;');
+    .html('more &#8594;');
 
 document.addEventListener('scroll', function() {
     // lastKnownScrollPosition = window.scrollX;
@@ -251,7 +263,6 @@ d3.select("#trans")
 
 function update(h) {
 
-    // update position and text of label according to slider scale
     if (d3.select("#trans").property("checked")) {
         d3.selectAll(".bun")
             .style("fill-opacity", "0");
@@ -271,7 +282,7 @@ function update(h) {
         return '#' + n.slice(0, 6);
     };
 
-    var indexColors = d3.selectAll(".index-color-circle")
+    // var indexColors = d3.selectAll(".index-color-circle")
 
     indexColors
         .style("background-color", randomColorDyn);
@@ -285,7 +296,7 @@ function update(h) {
     plot.selectAll(".location")
         .filter(function(d) { return d.timestamp > Date.parse(h) }) //select all the countries and prepare for a transition to new values
         .attr("transform", genPosStart)
-        .style("opacity", 0)
+        .style("opacity", 0);
 
     plot.selectAll(".location")
         .filter(function(d) { return d.timestamp <= Date.parse(h) }) //select all the countries and prepare for a transition to new values

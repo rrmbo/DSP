@@ -34,11 +34,6 @@ var ScreenRatioScale = (fullHeight + fullWidth) / 500;
 
 console.log(ScreenRatioScale);
 
-// var plotMarginX = 200,
-//     plotMarginy = 200,
-//     maxPlotHeight = fullHeight - plotMarginy * 5 / 4,
-//     maxPlotWidth = width - 2 * plotMarginX;
-
 ////////// colors //////////
 
 let black = "#000000",
@@ -59,11 +54,11 @@ var colors = {
 
 ////////// body //////////
 
-var body = d3.select("body");
+// var body = d3.select("body");
 
-body
-    .style("width", fullWidth)
-    .style("height", fullHeight);
+// body
+//     .style("width", fullWidth)
+//     .style("height", fullHeight);
 
 ////////// slider //////////
 
@@ -134,7 +129,7 @@ var label = slider.append("text")
 var svgPlot = d3.select("#vis")
     .append("svg")
     .attr("id", "canvas")
-    .attr("width", fullWidth)
+    .attr("width", fullWidth * 1.2)
     .attr("height", height);
 
 var plot = svgPlot.append("g")
@@ -226,10 +221,6 @@ function drawPlot(data) {
         }
         kaChing
             .attr("transform", "translate (" + (d3.mouse(this)[0] - window.scrollX) + "," + (d3.mouse(this)[1]) + ") scale (0.5)")
-            // .attr({
-            //     width: 1 + "em",
-            //     height: 1 + "em"
-            // });
     }
 
     var mouseleave = function() {
@@ -270,10 +261,9 @@ function drawPlot(data) {
 
 d3.select("#info-link")
     .attr("href", "#info-text")
-    .html('about &#8594;');
+    .html('more &#8594;');
 
 document.addEventListener('scroll', function() {
-    // lastKnownScrollPosition = window.scrollX;
 
     if (window.scrollX > 10) {
         d3.select("#info-link")
@@ -291,26 +281,14 @@ document.addEventListener('scroll', function() {
 d3.select("#trans")
     .on("change", update);
 
-// d3.select("#real")
-//     .on("change", update);
-// update();
-
 function update(h) {
 
-    // var label = d3.select('svg').append('text')
-    //     .attr('transform', 'translate(' + [5, 100] + ')')
-
-    // update position and text of label according to slider scale
     if (d3.select("#trans").property("checked")) {
         d3.selectAll(".location")
             .style("fill", "none");
-        // d3.selectAll(".popup")
-        //     .style("background-color", "unset")
     } else {
         d3.selectAll(".location")
             .style("fill", (d) => colors[d.type]);
-        // d3.selectAll(".popup")
-        //     .style("background-color", "var--(white)")
     }
 
     handle
@@ -322,8 +300,7 @@ function update(h) {
     plot.selectAll(".location")
         .filter(function(d) { return d.timestamp > Date.parse(h) }) //select all the countries and prepare for a transition to new values
         .style("opacity", 0)
-        .attr("r", 0)
-        // .attr("r", 0);
+        .attr("r", 0);
 
     plot.selectAll(".location")
         .transition()

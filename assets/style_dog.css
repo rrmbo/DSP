@@ -5,7 +5,9 @@
     --rose: #ffcccc;
     --violet: #663399;
     --navy: #000066;
+    --margin: 50px;
     --window-width: 100vw;
+    --window-height: 100vh;
     --infobox-width: 20vw;
     --full-width: calc(var(--window-width)+var(--infobox-width));
     --slider-height: 200px;
@@ -23,7 +25,7 @@
 body {
     font-family: "helvetia", Arial, sans-serif;
     color: var(--black);
-    width: var(--full-width);
+    width: var(--window-width);
     overflow-y: hidden;
     scroll-behavior: smooth;
     font-size: 1em;
@@ -33,8 +35,8 @@ body {
 body,
 #vis,
 #vis #canvas {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: var(--window-height);
+    height: var(--window-height);
     min-height: -webkit-fill-available;
 }
 
@@ -51,8 +53,8 @@ input[type="checkbox" i] {
 
 #title {
     position: fixed;
-    left: 50px;
-    top: 50px;
+    left: var(--margin);
+    top: var(--margin);
     font-size: var(--tall-size);
     font-weight: 900;
 }
@@ -63,16 +65,20 @@ a:visited {
     text-decoration: none;
 }
 
-#back-link {
+#info-link {
     font-size: var(--medium-size);
     line-height: var(--medium-size);
     font-weight: 500;
 }
 
+#about-link {
+    display: none;
+}
+
 #index {
     position: absolute;
-    right: 50px;
-    top: 50px;
+    right: var(--margin);
+    top: var(--margin);
     font-size: var(--medium-size);
     line-height: var(--medium-size);
     text-align: right;
@@ -95,7 +101,7 @@ a:visited {
 
 #info-text {
     width: var(--infobox-width);
-    padding: 50px;
+    padding: var(--margin);
     position: absolute;
     left: var(--window-width);
     top: 0;
@@ -116,7 +122,7 @@ h1 {
 #credits {
     text-align: left;
     width: var(--infobox-width);
-    padding: 50px;
+    padding: var(--margin);
     position: absolute;
     left: var(--window-width);
     bottom: 0;
@@ -141,15 +147,6 @@ h1 {
     stroke-width: 2px;
 }
 
-
-/* .track-inset::before {
-    display: block;
-    content: "";
-    width: 100%;
-    height: 30px;
-    background-color: #000;
-} */
-
 .track-inset {
     stroke: var(--black);
     stroke-width: 2px;
@@ -170,14 +167,13 @@ h1 {
 }
 
 .popup {
-    /* opacity: 0; */
     display: none;
     position: fixed;
     left: 0;
     top: 150px;
     width: 30vw;
     max-width: 500px;
-    padding: 0 1em 1em 50px;
+    padding: 0 1em 1em var(--margin);
     font-size: var(--medium-size);
     background-color: var(--white);
     border-radius: 10px;
@@ -202,7 +198,7 @@ h1 {
     font-size: var(--medium-size);
     font-family: 'Caveat', cursive;
     text-align: center;
-    padding: 50px;
+    padding: var(--margin);
     position: fixed;
     left: 0;
     bottom: 120px;
@@ -212,54 +208,45 @@ h1 {
 
 /*         media fixes         */
 
-
-/* @media only screen and (min-width: 450px) and (max-width: 1600px) {
+@media (max-aspect-ratio: 10/9) {
     body {
-        font-size: 0.7em;
+        overflow-x: hidden;
+        overflow-y: unset;
+        height: unset;
+        font-size: 1.2em;
     }
-} */
-
-@media only screen and (max-width: 450px) {
-    body {
-        font-size: 2em;
+    #instructions {
+        display: none!important;
+    }
+    #info-text {
+        width: unset;
+        padding: 0 var(--margin) 0 var(--margin);
+        margin-bottom: var(--margin);
+        position: relative;
+        left: 0;
+        top: unset;
+    }
+    #credits {
+        text-align: left;
+        width: unset;
+        padding: var(--margin);
+        position: relative;
+        left: unset;
+        top: unset;
+    }
+    #about-link {
+        display: block;
+        font-size: var(--medium-size);
+        line-height: var(--medium-size);
+        font-weight: 500;
+    }
+    #info-link {
+        display: none;
     }
 }
 
-
-/*         fuck you iOS         */
-
-@media all and (device-width: var(--iphone-se-w)) and (device-height: var(--iphone-se-h)) {
-    body {
-        font-size: 2em;
-    }
-    body,
-    #vis,
-    #vis #canvas {
-        width: var(--iphone-se-w);
-        height: var(--iphone-se-h);
-    }
-}
-
-@media all and (device-width: var(--iphone-xr-w)) and (device-height: var(--iphone-xr-h)) {
-    body {
-        font-size: 2em;
-    }
-    body,
-    #vis,
-    #vis #canvas {
-        width: var(--iphone-xr-w);
-        height: var(--iphone-xr-h);
-    }
-}
-
-@media all and (device-width: var(--iphone-12pro-w)) and (device-height: var(--iphone-12pro-h)) {
-    body {
-        font-size: 2em;
-    }
-    body,
-    #vis,
-    #vis #canvas {
-        width: var(--iphone-12pro-w);
-        height: var(--iphone-12pro-h);
+@media only screen and (max-width: 600px) {
+    .ticks {
+        font-size: 0.5em;
     }
 }
