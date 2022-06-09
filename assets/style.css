@@ -11,7 +11,7 @@
     --slider-height: 200px;
     --tall-size: 4em;
     --medium-size: 1.2em;
-    --small-size: 1em;
+    --small-size: 0.8em;
     --iphone-se-w: 375px;
     --iphone-se-h: 667px;
     --iphone-xr-w: 414px;
@@ -231,11 +231,12 @@ h1 {
 
 /*         media fixes         */
 
-@media only screen and (min-width: 450px) and (max-width: 1600px) {
+
+/* @media only screen and (min-width: 450px) and (max-width: 1600px) {
     body {
         font-size: 0.7em;
     }
-}
+} */
 
 @media only screen and (max-width: 450px) {
     body {
