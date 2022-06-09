@@ -240,8 +240,10 @@ h1 {
         overflow-x: hidden;
         overflow-y: unset;
         height: unset;
-        width: 100vw!important;
         font-size: 1.4em;
+    }
+    #canvas {
+        width: 100vw!important;
     }
     .kaching,
     #instructions {
