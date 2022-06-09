@@ -315,6 +315,7 @@ function update(h) {
     plot.selectAll(".location")
         .filter(function(d) { return d.timestamp > Date.parse(h) }) //select all the countries and prepare for a transition to new values
         .style("opacity", 0)
+        .attr("r", 0)
         // .attr("r", 0);
 
     plot.selectAll(".location")
