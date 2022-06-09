@@ -90,7 +90,6 @@ a:visited {
 }
 
 .index-color-circle {
-    /* content: ""; */
     display: inline-block;
     margin-left: 0.5em;
     transform: translateY(0.1em);
@@ -258,6 +257,9 @@ h1 {
     @media only screen and (max-device-width: 500px) and (max-aspect-ratio: 10/9) {
         body {
             font-size: 2em;
+        }
+        #switch {
+            font-size: 1.4em;
         }
     }
 }

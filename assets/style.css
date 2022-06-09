@@ -289,6 +289,10 @@ h1 {
     body {
         font-size: 2em;
     }
+    #real-check,
+    #switch {
+        font-size: 1.4em;
+    }
 }
 
 
