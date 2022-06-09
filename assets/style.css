@@ -257,6 +257,9 @@ h1 {
         left: 0;
         top: unset;
     }
+    #info-text .divider {
+        margin: 2em 0 2em 0;
+    }
     #credits {
         text-align: left;
         width: unset;
@@ -279,6 +282,12 @@ h1 {
 @media only screen and (max-width: 600px) {
     .ticks {
         font-size: 0.5em;
+    }
+}
+
+@media only screen and (max-device-width: 500px) and (max-aspect-ratio: 10/9) {
+    body {
+        font-size: 2em;
     }
 }
 
